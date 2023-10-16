@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include vendormanagement *.css
+recursive-include vendormanagement *.csv
+recursive-include vendormanagement *.html
+recursive-include vendormanagement *.ico
+recursive-include vendormanagement *.js
+recursive-include vendormanagement *.json
+recursive-include vendormanagement *.md
+recursive-include vendormanagement *.png
+recursive-include vendormanagement *.py
+recursive-include vendormanagement *.svg
+recursive-include vendormanagement *.txt
+recursive-exclude vendormanagement *.pyc
