@@ -6,3 +6,8 @@ from frappe.model.document import Document
 
 class State(Document):
 	pass
+
+@frappe.whitelist()
+def get_gst_code_for_state(state_name):
+	data=frappe.db.sql("""select gst_code from `tabState` where state=%(state)s """,values={'state':state_name},as_dict=1)
+	return data
