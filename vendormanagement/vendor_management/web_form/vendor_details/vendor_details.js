@@ -4,31 +4,44 @@ frappe.ready(function () {
     const pan_number = data.pan_number;
     const gst_number = data.gst_provisional_id;
     const stateName = data.state;
-
-    // PAN Number Validation
-    if (pan_number) {
-      const panNumberPattern = /^[A-Z]{5}[0-9]{4}[A-Z]$/;
-      if (!panNumberPattern.test(pan_number)) {
-        frappe.msgprint(
-          __("Invalid PAN Number. Please enter a valid PAN Number.")
-        );
+	const country=data.country
+if(country=="India"){
+	// PAN Number Validation
+	if (!pan_number) {
+        frappe.msgprint(__("PAN Number is mandatory for India."));
         return false; // Prevent form submission
-      }
     }
+	else {
+		const panNumberPattern = /^[A-Z]{5}[0-9]{4}[A-Z]$/;
+		if (!panNumberPattern.test(pan_number)) {
+		  frappe.msgprint(
+			__("Invalid PAN Number. Please enter a valid PAN Number.")
+		  );
+		  return false; // Prevent form submission
+		}
+	  }
+  
+	  // GST Validation
+	  if (!gst_number) {
+        frappe.msgprint(__("GST Number is mandatory for India."));
+        return false; // Prevent form submission
+    }
+	else
+	{
+		// Define a regular expression pattern for GST code validation in India
+		const gstCodePattern =
+		  /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z][0-9]{1}[Z][0-9]{1}$/;
+		if (!gstCodePattern.test(gst_number)) {
+		  frappe.msgprint(
+			__("Invalid GST Number. Please enter a valid GST Number.")
+		  );
+		  return false;
+		}
+		return true;
+	  }
 
-    // GST Validation
-    if (gst_number) {
-      // Define a regular expression pattern for GST code validation in India
-      const gstCodePattern =
-        /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z][0-9]{1}[Z][0-9]{1}$/;
-      if (!gstCodePattern.test(gst_number)) {
-        frappe.msgprint(
-          __("Invalid GST Number. Please enter a valid GST Number.")
-        );
-        return false;
-      }
-      return true;
-    }
+}
+    
   };
 });
 

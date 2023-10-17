@@ -18,11 +18,17 @@ def duplicate(name,pan_number,din,mobile):
 	
 
 	for d in vendor_data:
+		
 		description=[]
-		if d.din==din:
-			description.append("Din Number")
-		if d.pan_number==pan_number:
-			description.append("Pan Number")
+		if d.din is not '':
+			
+
+			if d.din==din:
+				description.append("Din Number")
+		if d.pan_number is not '':
+
+			if d.pan_number==pan_number:
+				description.append("Pan Number")
 		if d.mobile_number==mobile:
 			description.append("Mobile Number")
 		description_str = ', '.join(description)+" Duplicated"
