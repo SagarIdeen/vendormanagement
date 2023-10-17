@@ -106,12 +106,12 @@ def get_vendor_data():
 		
 		name = d["name"]
 		if name:
-			existing_doc = frappe.db.exists("Vendor Details",{"name":name})
+			existing_doc = frappe.db.exists("Vendor Details",{"name1":name})
 			if existing_doc:
 				print("no")
 			else:
 				new_doc=frappe.new_doc("Vendor Details")
-				new_doc.name=name
+				new_doc.name1=name
 				new_doc.address1=d['address1']
 				new_doc.address_2=d['address_2']
 				new_doc.attachements=d['attachements']
