@@ -6,56 +6,31 @@ from frappe.model.document import Document
 from frappe.share import add as add_share
 import requests
 import json
+import re
 
 class VendorDetails(Document):
+	pass
+	# def validate(self):
+	# 	if pan_number:
+
+	# 		# Regular expression for PAN number validation in India
+	# 		pan_regex = r"^[A-Z]{5}[0-9]{4}[A-Z]{1}$"
+
+	# 		if re.match(pan_regex,self.pan_number):
+	# 			return True
+	# 		else:
+	# 			frappe.throw("Enter a Valid PAN Number")
+	# 	# Regular expression for Indian GST number validation
+	# 	gst_regex = r"^\d{2}[A-Z]{5}\d{4}[A-Z]{1}[1-9A-Z]{1}Z\d{1}$"
+
+	# 	if re.match(gst_regex,self.gst_provisional_id):
+	# 		return True
+	# 	else:
+	# 		frappe.throw("Enter A valid GST")
 	
-
-
-
-	def on_update(self):
-		
-		# vendor_data=frappe.db.sql("""select name,din,mobile_number,pan_number from `tabVendor  details` where name !=%(name)s and ( din=%(din)s or pan_number=%(pan_number)s 
-		# or mobile_number=%(mobile_number)s)""",values={'din':self.din,'pan_number':self.pan_number,'mobile_number':self.mobile_number,'name':self.name},as_dict=1)
-		# if vendor_data:
-		# 	self.reference=[]
-		# 	for d in vendor_data:
-		# 		description=[]
-		# 		if d.din==self.din:
-		# 			description.append("Din Number")
-		# 		if d.pan_number==self.pan_number:
-		# 			description.append("Pan Number")
-		# 		if d.mobile_number==self.mobile_number:
-		# 			description.append("Mobile Number")
-		# 		description_str = ', '.join(description)+" Duplicated"
-				
-		# 		self.append('reference',{
-		# 			'reference':d['name'],
-		# 			'description':description_str 
-				# })
-				pass
 			
 	
-	def before_insert(self):
-		# vendor_data=frappe.db.sql("""select name,din,mobile_number,pan_number from `tabVendor  details` where  din=%(din)s or pan_number=%(pan_number)s 
-		# or mobile_number=%(mobile_number)s""",values={'din':self.din,'pan_number':self.pan_number,'mobile_number':self.mobile_number,'name':self.name},as_dict=1)
-		# print("vendor data",vendor_data)
-		# if vendor_data:
-		# 	self.reference=[]
-		# 	for d in vendor_data:
-		# 		description=[]
-		# 		if d.din==self.din:
-		# 			description.append("Din Number")
-		# 		if d.pan_number==self.pan_number:
-		# 			description.append("Pan Number")
-		# 		if d.mobile_number==self.mobile_number:
-		# 			description.append("Mobile Number")
-		# 		description_str = ', '.join(description)+" Duplicated"
-				
-		# 		self.append('reference',{
-		# 			'reference':d['name'],
-		# 			'description':description_str 
-		# 		})
-		pass
+	
 			
 @frappe.whitelist()
 def duplicate(name,pan_number,din,mobile):
@@ -88,7 +63,7 @@ def duplicate(name,pan_number,din,mobile):
 # 	print("Response:",response_data)
 @frappe.whitelist(allow_guest=True)
 def get_vendor_list():
-	# data=frappe.get_all("Vendor Details",filters={}, fields=['name'])
+	
 	data=frappe.db.sql("""select * from `tabVendor Details` """,as_dict=1)
 	return data
 
