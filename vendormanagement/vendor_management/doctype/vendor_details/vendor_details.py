@@ -94,7 +94,7 @@ def get_vendor_list():
 
 @frappe.whitelist()
 def get_vendor_data():
-	url="http://localhost:8030/api/method/vendormanagement.vendor_management.doctype.vendor_details.vendor_details.get_vendor_list"
+	url="http://35.154.0.123:81/api/method/vendormanagement.vendor_management.doctype.vendor_details.vendor_details.get_vendor_list"
 	response = requests.request("GET", url,headers = {
 			'Content-Type': 'application/json',
 				})

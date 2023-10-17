@@ -90,8 +90,7 @@
    "fieldname": "mobile_number",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Mobile Number",
-   "reqd": 1
+   "label": "Mobile Number"
   },
   {
    "fieldname": "banking_account_number",
@@ -116,14 +115,12 @@
   {
    "fieldname": "pan_number",
    "fieldtype": "Data",
-   "label": "PAN Number",
-   "reqd": 1
+   "label": "PAN Number"
   },
   {
    "fieldname": "gst_provisional_id",
    "fieldtype": "Data",
-   "label": "GST Provisional ID",
-   "reqd": 1
+   "label": "GST Provisional ID"
   },
   {
    "fieldname": "msme_category",
@@ -201,12 +198,13 @@
   {
    "fieldname": "name1",
    "fieldtype": "Data",
-   "label": "Name"
+   "label": "Name",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-17 14:19:51.373368",
+ "modified": "2023-10-17 14:27:55.737576",
  "modified_by": "Administrator",
  "module": "Vendor Management",
  "name": "Vendor Details",
