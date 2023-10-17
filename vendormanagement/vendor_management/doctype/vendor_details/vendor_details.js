@@ -4,7 +4,6 @@
 frappe.ui.form.on('Vendor Details', {
 	
 	refresh: function (frm) {
-		console.log(frm.doc.status);
 		if (frm.doc.status == "New") {
 			frm.events.approve_reject(frm)
 		} else {

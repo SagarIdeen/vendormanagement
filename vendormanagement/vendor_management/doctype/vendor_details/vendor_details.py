@@ -10,28 +10,7 @@ import re
 
 class VendorDetails(Document):
 	pass
-	# def validate(self):
-	# 	if pan_number:
-
-	# 		# Regular expression for PAN number validation in India
-	# 		pan_regex = r"^[A-Z]{5}[0-9]{4}[A-Z]{1}$"
-
-	# 		if re.match(pan_regex,self.pan_number):
-	# 			return True
-	# 		else:
-	# 			frappe.throw("Enter a Valid PAN Number")
-	# 	# Regular expression for Indian GST number validation
-	# 	gst_regex = r"^\d{2}[A-Z]{5}\d{4}[A-Z]{1}[1-9A-Z]{1}Z\d{1}$"
-
-	# 	if re.match(gst_regex,self.gst_provisional_id):
-	# 		return True
-	# 	else:
-	# 		frappe.throw("Enter A valid GST")
-	
-			
-	
-	
-			
+				
 @frappe.whitelist()
 def duplicate(name,pan_number,din,mobile):
 	vendor_data=frappe.db.sql("""select name,din,mobile_number,pan_number,status from `tabVendor Details` where name !=%(name)s and ( din=%(din)s or pan_number=%(pan_number)s 
@@ -69,7 +48,7 @@ def get_vendor_list():
 
 @frappe.whitelist()
 def get_vendor_data():
-	url="http://35.154.0.123:81/api/method/vendormanagement.vendor_management.doctype.vendor_details.vendor_details.get_vendor_list"
+	url="http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_details.vendor_details.get_vendor_list"
 	response = requests.request("GET", url,headers = {
 			'Content-Type': 'application/json',
 				})
