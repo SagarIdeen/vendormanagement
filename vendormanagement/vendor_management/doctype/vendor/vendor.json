@@ -1,0 +1,116 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-10-16 16:45:31.402285",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+    "first_name",
+    "column_break_oprm3",
+    "email",
+    "section_break_k8s1o",
+    "password",
+    "column_break_nq9ah",
+    "enabled",
+    "section_break_fdaok",
+    "user",
+    "column_break_5ughb",
+    "url",
+    "column_break_1uthq",
+    "role"
+   ],
+   "fields": [
+    {
+     "fieldname": "email",
+     "fieldtype": "Data",
+     "label": "Email"
+    },
+    {
+     "fieldname": "column_break_oprm3",
+     "fieldtype": "Column Break"
+    },
+    {
+     "fieldname": "first_name",
+     "fieldtype": "Data",
+     "label": "Name"
+    },
+    {
+     "fieldname": "password",
+     "fieldtype": "Data",
+     "label": "Password"
+    },
+    {
+     "fieldname": "section_break_fdaok",
+     "fieldtype": "Section Break"
+    },
+    {
+     "default": "vendor_user",
+     "fieldname": "role",
+     "fieldtype": "Data",
+     "hidden": 1,
+     "label": "Role"
+    },
+    {
+     "fieldname": "column_break_nq9ah",
+     "fieldtype": "Column Break"
+    },
+    {
+     "fieldname": "section_break_k8s1o",
+     "fieldtype": "Section Break"
+    },
+    {
+     "fieldname": "user",
+     "fieldtype": "Link",
+     "label": "User",
+     "options": "User",
+     "read_only": 1
+    },
+    {
+     "default": "0",
+     "fieldname": "enabled",
+     "fieldtype": "Check",
+     "label": "Is Enabled"
+    },
+    {
+     "fieldname": "column_break_1uthq",
+     "fieldtype": "Column Break"
+    },
+    {
+     "default": "http://localhost:8030/vendor-details/new",
+     "fieldname": "url",
+     "fieldtype": "Data",
+     "hidden": 1,
+     "label": "Url"
+    },
+    {
+     "fieldname": "column_break_5ughb",
+     "fieldtype": "Column Break"
+    }
+   ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-10-16 16:45:31.402285",
+ "modified_by": "Administrator",
+ "module": "Vendor Management",
+ "name": "Vendor",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

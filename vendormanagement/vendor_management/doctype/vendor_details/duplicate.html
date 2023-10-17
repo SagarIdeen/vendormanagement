@@ -1,0 +1,37 @@
+<head>
+    <style>
+        th,
+        td {
+            text-align: left;
+            border: 1px solid rgb(237, 235, 235);
+            font-size: 12px;
+            padding: 5px 2px;
+            margin-left: 2px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div style=" padding: 15px; width: 100%; text-align: center;">
+        <h4>Duplicate Reference</h4>
+        <table style="width: 100%;border:2px solid rgb(237, 235, 235)">
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Status</th>
+
+
+            </tr>
+            {% for d in data %}
+            <tr>
+                <td style="padding:5px"><a href="/app/vendor--details/{{ d.name }}">{{d.name}}
+                    </a></td>
+                <td>{{d.description}}</td>
+                <td>{{d.status}}</td>
+
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>

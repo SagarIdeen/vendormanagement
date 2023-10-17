@@ -1,0 +1,226 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{VD}-{#####}",
+ "creation": "2023-10-16 16:38:30.392752",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "duplicate",
+  "duplicate_section",
+  "contact_person_1",
+  "vendor_name",
+  "street",
+  "city",
+  "state",
+  "pin_code",
+  "column_break_7zejc",
+  "contact_person_2",
+  "address1",
+  "address_2",
+  "telephone_number",
+  "mobile_number",
+  "section_break_a4ddb",
+  "banking_account_number",
+  "bank_name",
+  "column_break_pjjwr",
+  "bank_branch",
+  "ifsc_code",
+  "section_break_fgkru",
+  "pan_number",
+  "din",
+  "gst_provisional_id",
+  "column_break_h5moa",
+  "msme_category",
+  "created_by",
+  "status",
+  "attachements",
+  "section_break_8wpuy"
+ ],
+ "fields": [
+  {
+   "fieldname": "contact_person_1",
+   "fieldtype": "Data",
+   "label": "Contact Person 1"
+  },
+  {
+   "fieldname": "contact_person_2",
+   "fieldtype": "Data",
+   "label": "Contact Person 2"
+  },
+  {
+   "fieldname": "street",
+   "fieldtype": "Data",
+   "label": "Street"
+  },
+  {
+   "fieldname": "address1",
+   "fieldtype": "Data",
+   "label": "Address1"
+  },
+  {
+   "fieldname": "address_2",
+   "fieldtype": "Data",
+   "label": "Address 2"
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Data",
+   "label": "City"
+  },
+  {
+   "fieldname": "pin_code",
+   "fieldtype": "Data",
+   "label": "Pin code"
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Data",
+   "label": "State"
+  },
+  {
+   "fieldname": "telephone_number",
+   "fieldtype": "Data",
+   "label": "Telephone Number "
+  },
+  {
+   "fieldname": "mobile_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Mobile Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "banking_account_number",
+   "fieldtype": "Data",
+   "label": "Banking Account Number"
+  },
+  {
+   "fieldname": "bank_name",
+   "fieldtype": "Data",
+   "label": "Bank Name"
+  },
+  {
+   "fieldname": "bank_branch",
+   "fieldtype": "Data",
+   "label": "Bank Branch"
+  },
+  {
+   "fieldname": "ifsc_code",
+   "fieldtype": "Data",
+   "label": "IFSC code"
+  },
+  {
+   "fieldname": "pan_number",
+   "fieldtype": "Data",
+   "label": "PAN Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "gst_provisional_id",
+   "fieldtype": "Data",
+   "label": "GST Provisional ID",
+   "reqd": 1
+  },
+  {
+   "fieldname": "msme_category",
+   "fieldtype": "Data",
+   "label": "MSME Category"
+  },
+  {
+   "fieldname": "din",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "DIN"
+  },
+  {
+   "fieldname": "created_by",
+   "fieldtype": "Link",
+   "label": "Created by",
+   "options": "User"
+  },
+  {
+   "default": "New",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "New\nApproved\nRejected",
+   "read_only": 1
+  },
+  {
+   "fieldname": "vendor_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Vendor Name"
+  },
+  {
+   "fieldname": "column_break_7zejc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_a4ddb",
+   "fieldtype": "Section Break",
+   "label": "Bank Details"
+  },
+  {
+   "fieldname": "column_break_pjjwr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_fgkru",
+   "fieldtype": "Section Break",
+   "label": "Company Info"
+  },
+  {
+   "fieldname": "column_break_h5moa",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "duplicate",
+   "fieldtype": "HTML",
+   "label": "Duplicate"
+  },
+  {
+   "fieldname": "duplicate_section",
+   "fieldtype": "Section Break",
+   "label": "Vendor Details"
+  },
+  {
+   "fieldname": "section_break_8wpuy",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "attachements",
+   "fieldtype": "Attach",
+   "label": "Attachments"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-10-17 13:49:49.247519",
+ "modified_by": "Administrator",
+ "module": "Vendor Management",
+ "name": "Vendor Details",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

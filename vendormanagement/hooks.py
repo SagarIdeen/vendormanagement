@@ -9,6 +9,13 @@ app_license = "l"
 
 # Includes in <head>
 # ------------------
+app_logo_url = "/assets/vendormanagement/images/cropped-Nitta-favicon.png"
+brand_html = '<img src="/assets/vendormanagement/images/cropped-Nitta-favicon.png">&nbsp&nbsp<b>Vendor Management</b>'
+
+website_context = {
+    "favicon": "/assets/vendormanagement/images/favicon.png",
+    "splash_image": "/assets/vendormanagement/images/cropped-Nitta-favicon.png"
+}
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/vendormanagement/css/vendormanagement.css"
