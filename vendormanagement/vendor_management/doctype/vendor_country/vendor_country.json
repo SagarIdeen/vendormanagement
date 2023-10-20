@@ -9,8 +9,10 @@
  "engine": "InnoDB",
  "field_order": [
   "id",
-  "country",
-  "country_code"
+  "column_break_07olu",
+  "country_code",
+  "column_break_oyxam",
+  "country"
  ],
  "fields": [
   {
@@ -22,17 +24,26 @@
   {
    "fieldname": "id",
    "fieldtype": "Data",
-   "label": "ID"
+   "label": "ID",
+   "unique": 1
   },
   {
    "fieldname": "country_code",
    "fieldtype": "Data",
    "label": "Country Code"
+  },
+  {
+   "fieldname": "column_break_07olu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_oyxam",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-20 10:13:39.610148",
+ "modified": "2023-10-20 17:08:12.729510",
  "modified_by": "Administrator",
  "module": "Vendor Management",
  "name": "Vendor_Country",

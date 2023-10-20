@@ -9,14 +9,22 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "city_id",
-  "city",
-  "state",
-  "state_id",
-  "state_code",
-  "country_id",
+  "country_section",
   "country",
-  "country_code"
+  "column_break_w3ghi",
+  "country_id",
+  "column_break_k2v8m",
+  "country_code",
+  "state_section",
+  "state",
+  "column_break_a66ed",
+  "state_id",
+  "column_break_lscbq",
+  "state_code",
+  "city_section",
+  "city",
+  "column_break_ft95s",
+  "city_id"
  ],
  "fields": [
   {
@@ -36,19 +44,25 @@
    "options": "Vendor State"
   },
   {
+   "fetch_from": "state.state_id",
    "fieldname": "state_id",
    "fieldtype": "Data",
-   "label": "State Id"
+   "label": "State Id",
+   "read_only": 1
   },
   {
+   "fetch_from": "state.state_code",
    "fieldname": "state_code",
    "fieldtype": "Data",
-   "label": "State Code"
+   "label": "State Code",
+   "read_only": 1
   },
   {
+   "fetch_from": "country.id",
    "fieldname": "country_id",
    "fieldtype": "Data",
-   "label": "Country Id"
+   "label": "Country Id",
+   "read_only": 1
   },
   {
    "fieldname": "country",
@@ -57,14 +71,51 @@
    "options": "Vendor_Country"
   },
   {
+   "fetch_from": "country.country_code",
    "fieldname": "country_code",
    "fieldtype": "Data",
-   "label": "Country Code"
+   "label": "Country Code",
+   "read_only": 1
+  },
+  {
+   "fieldname": "city_section",
+   "fieldtype": "Section Break",
+   "label": "City"
+  },
+  {
+   "fieldname": "column_break_k2v8m",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "state_section",
+   "fieldtype": "Section Break",
+   "label": "State"
+  },
+  {
+   "fieldname": "column_break_a66ed",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "country_section",
+   "fieldtype": "Section Break",
+   "label": "Country"
+  },
+  {
+   "fieldname": "column_break_w3ghi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_lscbq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_ft95s",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-20 15:40:34.713674",
+ "modified": "2023-10-20 17:03:04.103136",
  "modified_by": "Administrator",
  "module": "Vendor Management",
  "name": "Vendor City",
@@ -84,7 +135,9 @@
    "write": 1
   }
  ],
+ "show_title_field_in_link": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "title_field": "city"
 }

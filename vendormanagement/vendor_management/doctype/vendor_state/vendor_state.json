@@ -9,11 +9,17 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "state",
-  "state_id",
-  "country_id",
-  "country_code",
+  "country_section",
   "country_name",
+  "column_break_ez1ez",
+  "country_id",
+  "column_break_z8rzh",
+  "country_code",
+  "section_break_d2kg9",
+  "state",
+  "column_break_xwruh",
+  "state_id",
+  "column_break_0lqkt",
   "state_code"
  ],
  "fields": [
@@ -24,14 +30,18 @@
   },
   {
    "default": "0",
+   "fetch_from": "country_name.id",
    "fieldname": "country_id",
    "fieldtype": "Data",
-   "label": "Country Id"
+   "label": "Country Id",
+   "read_only": 1
   },
   {
+   "fetch_from": "country_name.country_code",
    "fieldname": "country_code",
    "fieldtype": "Data",
-   "label": "Country Code"
+   "label": "Country Code",
+   "read_only": 1
   },
   {
    "fieldname": "country_name",
@@ -47,12 +57,38 @@
   {
    "fieldname": "state_id",
    "fieldtype": "Data",
-   "label": "State_id"
+   "label": "State_id",
+   "unique": 1
+  },
+  {
+   "fieldname": "country_section",
+   "fieldtype": "Section Break",
+   "label": "Country"
+  },
+  {
+   "fieldname": "column_break_ez1ez",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_z8rzh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_d2kg9",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_xwruh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_0lqkt",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-20 14:56:52.011965",
+ "modified": "2023-10-20 17:09:37.573255",
  "modified_by": "Administrator",
  "module": "Vendor Management",
  "name": "Vendor State",
