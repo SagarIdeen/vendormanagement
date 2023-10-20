@@ -1,0 +1,90 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "format:{city}-{city_id}",
+ "creation": "2023-10-20 12:22:44.377834",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "city_id",
+  "city",
+  "state",
+  "state_id",
+  "state_code",
+  "country_id",
+  "country",
+  "country_code"
+ ],
+ "fields": [
+  {
+   "fieldname": "city_id",
+   "fieldtype": "Data",
+   "label": "City Id"
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Data",
+   "label": "City"
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Link",
+   "label": "State",
+   "options": "Vendor State"
+  },
+  {
+   "fieldname": "state_id",
+   "fieldtype": "Data",
+   "label": "State Id"
+  },
+  {
+   "fieldname": "state_code",
+   "fieldtype": "Data",
+   "label": "State Code"
+  },
+  {
+   "fieldname": "country_id",
+   "fieldtype": "Data",
+   "label": "Country Id"
+  },
+  {
+   "fieldname": "country",
+   "fieldtype": "Link",
+   "label": "Country",
+   "options": "Vendor_Country"
+  },
+  {
+   "fieldname": "country_code",
+   "fieldtype": "Data",
+   "label": "Country Code"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-10-20 15:40:34.713674",
+ "modified_by": "Administrator",
+ "module": "Vendor Management",
+ "name": "Vendor City",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

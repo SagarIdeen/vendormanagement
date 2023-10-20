@@ -8,7 +8,9 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "country"
+  "id",
+  "country",
+  "country_code"
  ],
  "fields": [
   {
@@ -16,11 +18,21 @@
    "fieldtype": "Data",
    "label": "Country",
    "unique": 1
+  },
+  {
+   "fieldname": "id",
+   "fieldtype": "Data",
+   "label": "ID"
+  },
+  {
+   "fieldname": "country_code",
+   "fieldtype": "Data",
+   "label": "Country Code"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-18 00:25:31.503200",
+ "modified": "2023-10-20 10:13:39.610148",
  "modified_by": "Administrator",
  "module": "Vendor Management",
  "name": "Vendor_Country",

@@ -53,7 +53,7 @@ def get_vendor_list():
 	print("data",data)
 	return data
 
-@frappe.whitelist()
+@frappe.whitelist(allow_guest=True)
 def get_vendor_data():
 	url="http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_details.vendor_details.get_vendor_list"
 	# url="http://localhost:8030/api/method/vendormanagement.vendor_management.doctype.vendor_details.vendor_details.get_vendor_list"
@@ -87,6 +87,7 @@ def receive_and_create_vendor_data(response_data):
 					new_doc.bank_branch=d['bank_branch']
 					new_doc.bank_name=d['bank_name']
 					new_doc.attachements=d['attachements']
+					new_doc.country=d['country']
 					new_doc.city=d['city']
 					new_doc.contact_person_1=d['contact_person_1']
 					new_doc.contact_person_2=d['contact_person_2']
