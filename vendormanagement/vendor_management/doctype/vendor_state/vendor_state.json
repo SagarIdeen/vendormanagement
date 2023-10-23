@@ -33,7 +33,7 @@
    "fetch_from": "country_name.id",
    "fieldname": "country_id",
    "fieldtype": "Data",
-   "label": "Country Id",
+   "label": "Country ID",
    "read_only": 1
   },
   {
@@ -57,7 +57,7 @@
   {
    "fieldname": "state_id",
    "fieldtype": "Data",
-   "label": "State_id",
+   "label": "State ID",
    "unique": 1
   },
   {
@@ -75,7 +75,8 @@
   },
   {
    "fieldname": "section_break_d2kg9",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "label": "State"
   },
   {
    "fieldname": "column_break_xwruh",
@@ -88,7 +89,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-20 17:09:37.573255",
+ "modified": "2023-10-20 17:24:38.079415",
  "modified_by": "Administrator",
  "module": "Vendor Management",
  "name": "Vendor State",

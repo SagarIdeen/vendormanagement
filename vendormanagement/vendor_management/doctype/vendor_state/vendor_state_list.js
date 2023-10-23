@@ -1,9 +1,9 @@
-frappe.listview_settings['Vendor City'] = {
+frappe.listview_settings['Vendor State'] = {
     onload: function (listview) {
         // Add a custom button to the list view toolbar
-        listview.page.add_button(__("GET CITY"), function () {
+        listview.page.add_button(__("GET STATE"), function () {
             frappe.call({
-                method: "vendormanagement.vendor_management.doctype.vendor_city.vendor_city.get_city",
+                method: "vendormanagement.vendor_management.doctype.vendor_state.vendor_state.get_state",
                 freeze: true,
                 callback: function (r) {
                     console.log(r.message);

@@ -10,7 +10,7 @@ class Vendor_Country(Document):
 	pass
 @frappe.whitelist(allow_guest=True)
 def get_country():
-	url="http://localhost:8030/api/method/vendormanagement.vendor_management.doctype.vendor_country.vendor_country.get_country_list"
+	url="http://35.154.0.123:8080/api/method/vendormanagement.vendor_management.doctype.vendor_country.vendor_country.get_country_list"
 	response = requests.request("GET", url,headers = {
 			'Content-Type': 'application/json',
 				})
@@ -18,10 +18,10 @@ def get_country():
 	for d in response_data["message"]:
 			id = d["id"]
 			if id:
-				existing_doc = frappe.db.exists("demo_country", {"id":id})
+				existing_doc = frappe.db.exists("Vendor_Country", {"id":id})
 				
 				if existing_doc:
-					country = frappe.get_doc("demo_country", existing_doc)
+					country = frappe.get_doc("Vendor_Country", existing_doc)
 					if country.country != d['name']:
 						print("country.country",d['name'],country.country)
 						# frappe.rename_doc("demo_country",country.country, d['name'],merge=merge)
@@ -33,7 +33,7 @@ def get_country():
 
 
 				else:
-					new_doc=frappe.new_doc("demo_country")
+					new_doc=frappe.new_doc("Vendor_Country")
 					new_doc.id=d['id']
 					new_doc.country=d['name']
 					new_doc.insert(ignore_permissions=True)
