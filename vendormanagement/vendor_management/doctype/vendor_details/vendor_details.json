@@ -13,10 +13,10 @@
   "contact_person_1",
   "vendor_name",
   "street",
-  "city",
-  "state",
-  "gst_code",
   "country",
+  "state",
+  "city",
+  "gst_code",
   "column_break_7zejc",
   "contact_person_2",
   "address1",
@@ -70,8 +70,9 @@
   },
   {
    "fieldname": "city",
-   "fieldtype": "Data",
-   "label": "City"
+   "fieldtype": "Link",
+   "label": "City",
+   "options": "Vendor City"
   },
   {
    "fieldname": "pin_code",
@@ -82,7 +83,7 @@
    "fieldname": "state",
    "fieldtype": "Link",
    "label": "State",
-   "options": "State"
+   "options": "Vendor State"
   },
   {
    "fieldname": "telephone_number",
@@ -206,7 +207,6 @@
    "read_only": 1
   },
   {
-   "fetch_from": "state.gst_code",
    "fieldname": "gst_code",
    "fieldtype": "Data",
    "hidden": 1,
@@ -222,7 +222,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-18 00:37:29.292626",
+ "modified": "2023-10-25 14:39:08.990963",
  "modified_by": "Administrator",
  "module": "Vendor Management",
  "name": "Vendor Details",

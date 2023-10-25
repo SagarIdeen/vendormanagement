@@ -4,84 +4,114 @@ frappe.ready(function () {
     const pan_number = data.pan_number;
     const gst_number = data.gst_provisional_id;
     const stateName = data.state;
-	const country=data.country
-if(country=="India"){
-	// PAN Number Validation
-	if (!pan_number) {
+    const country = data.country;
+
+    if (country === "India") {
+      // PAN Number Validation
+      if (!pan_number) {
         frappe.msgprint(__("PAN Number is mandatory for India."));
         return false; // Prevent form submission
-    }
-	else {
-		const panNumberPattern = /^[A-Z]{5}[0-9]{4}[A-Z]$/;
-		if (!panNumberPattern.test(pan_number)) {
-		  frappe.msgprint(
-			__("Invalid PAN Number. Please enter a valid PAN Number.")
-		  );
-		  return false; // Prevent form submission
-		}
-	  }
-  
-	  // GST Validation
-	  if (!gst_number) {
+      } else {
+        const panNumberPattern = /^[A-Z]{5}[0-9]{4}[A-Z]$/;
+        if (!panNumberPattern.test(pan_number)) {
+          frappe.msgprint(
+            __("Invalid PAN Number. Please enter a valid PAN Number.")
+          );
+          return false; // Prevent form submission
+        }
+      }
+
+      // GST Validation
+      if (!gst_number) {
         frappe.msgprint(__("GST Number is mandatory for India."));
         return false; // Prevent form submission
+      } else {
+        // Define a regular expression pattern for GST code validation in India
+        const gstCodePattern =
+          /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z][0-9]{1}[Z][0-9]{1}$/;
+        if (!gstCodePattern.test(gst_number)) {
+          frappe.msgprint(
+            __("Invalid GST Number. Please enter a valid GST Number.")
+          );
+          return false;
+        }
+      }
     }
-	else
-	{
-		// Define a regular expression pattern for GST code validation in India
-		const gstCodePattern =
-		  /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z][0-9]{1}[Z][0-9]{1}$/;
-		if (!gstCodePattern.test(gst_number)) {
-		  frappe.msgprint(
-			__("Invalid GST Number. Please enter a valid GST Number.")
-		  );
-		  return false;
-		}
-		return true;
-	  }
 
-}
-    
+    return true; // Allow form submission for non-India countries
   };
+  frappe.web_form.on('country', (field, value) => {
+    update_state_filters();
+    update_city_filters();
 });
 
-//     let gstCodes = await getGSTCodeForState(stateName);
-// 	console.log("gst_code",gstCodes);
-//     if (gstCodes) {
+frappe.web_form.on('state', (field, value) => {
+    update_city_filters();
+});
 
-//         let gstCodePortion = gst_number.substr(0, 2); // Extract first 2 characters as GST code
-// 		 let panPortion = gst_number.substr(2, 10); // Extract next 10 characters as PAN number
-// 		let gstNumberPattern = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z][1-9A-Z]Z[0-9]$/;
+  function update_state_filters(){
+    
+    const country_name = frappe.web_form.get_value('country');
 
-//         if (gstCodePortion !== gstCodes || panPortion !== pan_number || !gstNumberPattern.test(gst_number)) {
-// 			console.log("gst_code1",gstCodes);
-//             frappe.msgprint(__("Invalid GST Number. Please enter a valid GST Number."));
-//             return false;
-//         }
-//     } else {
-//         frappe.msgprint(__("No GST code found for the selected state."));
-//         return false;
-//     }
+    if (country_name) {
+    // let  myurl='api/resource/State';
+        $.ajax({
+            method: 'GET',
 
-function getGSTCodeForState(stateName) {
-  return new Promise((resolve, reject) => {
-    frappe.call({
-      method:
-        "vendormanagement.vendor_management.doctype.state.state.get_gst_code_for_state",
-      args: {
-        state_name: stateName,
-      },
-      freeze: true,
-      callback: (r) => {
-        if (r.message && r.message[0] && r.message[0].gst_code) {
-          resolve(r.message[0].gst_code);
-        } else {
-          resolve(null);
-        }
-      },
-      error: (r) => {
-        reject(r);
-      },
-    });
-  });
+            url: `/api/method/vendormanagement.vendor_management.doctype.vendor_state.vendor_state.get_state_filter?country_name=${country_name}`,
+            // url:myurl,
+            success: function (result) {
+                const options = result.message.map(state => {
+                  
+                    return {
+                        'label': state.state , 
+                        'value': state.name 
+                    };
+                });
+
+                console.log('options',options);
+                
+                
+                const stateField = frappe.web_form.get_field('state'); 
+                stateField._data = options;
+                stateField.refresh();
+            }
+        });
+    }
+};
+function update_city_filters(){
+
+  let country = frappe.web_form.get_value('country');
+  let state=frappe.web_form.get_value('state')
+
+  if (country && state) {
+  // let  myurl='api/resource/State';
+      $.ajax({
+          method: 'GET',
+
+          url: `/api/method/vendormanagement.vendor_management.doctype.vendor_state.vendor_state.get_city_filter?country=${country}&state=${state}`,
+          // url:myurl,
+          success: function (result) {
+              const options = result.message.map(city => {
+                
+                  return {
+                      'label': city.city , 
+                      'value': city.name 
+                  };
+              });
+
+              console.log('options',options);
+              
+              
+              const cityField = frappe.web_form.get_field('city'); 
+              cityField._data = options;
+              cityField.refresh();
+          }
+      });
+  }
+
 }
+
+
+});
+

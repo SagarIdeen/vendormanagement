@@ -39,3 +39,13 @@ def get_state():
 def get_state_list():
 	state_list=frappe.db.sql("""select * from `tabVendor State` """,as_dict=1)
 	return state_list
+@frappe.whitelist(allow_guest=True)
+def get_state_filter(country_name):
+	state_list=frappe.db.sql("""select * from `tabVendor State` where country_name=%(country_name)s """,values={'country_name':country_name},as_dict=1)
+	return state_list
+@frappe.whitelist()
+def get_city_filter(country,state):
+	print(country,state)
+	city_list =frappe.db.sql("""select * from `tabVendor City` where country=%(country)s and state=%(state)s """,
+	values={'country':country,'state':state},as_dict=1)
+	return city_list

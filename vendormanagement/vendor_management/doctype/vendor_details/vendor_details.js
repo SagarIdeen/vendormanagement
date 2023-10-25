@@ -67,6 +67,37 @@ frappe.ui.form.on('Vendor Details', {
 
 
 	},
+	country:function(frm){
+		
+		frm.trigger('get_state')
+		frm.trigger('get_city')
+	},
+	state:function(frm){
+		frm.trigger('get_city')
+	},
+	get_state(frm){
+		frm.set_query('state', function () {
+			return {
+				query: "vendormanagement.vendor_management.doctype.vendor_city.vendor_city.get_state",
+				filters: { 'country_name': frm.doc.country }
+			};
+		});
+
+	},
+	get_city(frm){
+		if ((frm.doc.country)&&(frm.doc.state)){
+			frm.set_query('city', function () {
+				return {
+					query: "vendormanagement.vendor_management.doctype.vendor_city.vendor_city.get_city",
+					filters: { 'country': frm.doc.country,'state':frm.doc.state }
+				};
+			});
+
+		}
+		
+
+	}
+
 	
 	 
 });

@@ -58,3 +58,37 @@ def get_city():
 def get_city_list():
 	city_list=frappe.db.sql("""select * from `tabVendor City` """,as_dict=1)
 	return city_list
+
+@frappe.whitelist()
+def get_state(doctype, txt, searchfield, start, page_len, filters):
+	return frappe.db.sql("""SELECT name ,state
+	FROM `tabVendor State` 
+	WHERE country_name = %(country_name)s
+	
+	 """.format(**{
+				'key': searchfield
+			}), {
+			'txt': "%{}%".format(txt),
+			'_txt': txt.replace("%", ""),
+			'start': start,
+			'page_len': page_len,
+			'country_name':filters["country_name"]
+
+		})
+@frappe.whitelist()
+def get_city(doctype, txt, searchfield, start, page_len, filters):
+	return frappe.db.sql("""SELECT name ,city
+	FROM `tabVendor City` 
+	WHERE country = %(country)s and state=%(state)s
+	
+	 """.format(**{
+				'key': searchfield
+			}), {
+			'txt': "%{}%".format(txt),
+			'_txt': txt.replace("%", ""),
+			'start': start,
+			'page_len': page_len,
+			'country':filters["country"],
+			'state':filters["state"]
+
+		})
