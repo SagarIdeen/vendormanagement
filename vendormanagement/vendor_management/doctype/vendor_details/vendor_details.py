@@ -7,6 +7,7 @@ from frappe.share import add as add_share
 import requests
 import json
 import re
+import os
 
 class VendorDetails(Document):
 	pass

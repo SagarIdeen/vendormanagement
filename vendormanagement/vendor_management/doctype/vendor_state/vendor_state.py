@@ -3,6 +3,9 @@
 
 import frappe
 from frappe.model.document import Document
+import requests
+import json
+import re
 
 class VendorState(Document):
 	pass

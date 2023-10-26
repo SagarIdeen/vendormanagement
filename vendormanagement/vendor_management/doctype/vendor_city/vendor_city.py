@@ -3,6 +3,9 @@
 
 import frappe
 from frappe.model.document import Document
+import requests
+import json
+import re
 
 class VendorCity(Document):
 	pass
@@ -26,7 +29,7 @@ class VendorCity(Document):
 # 		new_doc.insert(ignore_permissions=True)
 # 	return city
 @frappe.whitelist(allow_guest=True)
-def get_city():
+def get_cities():
 	url="http://35.154.0.123:8080/api/method/vendormanagement.vendor_management.doctype.vendor_country.vendor_country.get_city_list"
 	response = requests.request("GET", url,headers = {
 			'Content-Type': 'application/json',

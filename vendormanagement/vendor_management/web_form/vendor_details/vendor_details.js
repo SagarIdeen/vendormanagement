@@ -38,7 +38,7 @@ frappe.ready(function () {
       }
     }
 
-    return true; // Allow form submission for non-India countries
+    // return true; // Allow form submission for non-India countries
   };
   frappe.web_form.on('country', (field, value) => {
     update_state_filters();
