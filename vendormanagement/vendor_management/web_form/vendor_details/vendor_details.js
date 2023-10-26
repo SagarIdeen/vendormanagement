@@ -8,9 +8,11 @@ frappe.ready(function () {
     let phone=data.mobile_number;
     if(phone==undefined){
       frappe.msgprint("Phone Number Is Mandatory")
+      return false; 
     }
     if(country==undefined){
       frappe.msgprint("Country Is Mandatory")
+      return false; 
 
     }
 
