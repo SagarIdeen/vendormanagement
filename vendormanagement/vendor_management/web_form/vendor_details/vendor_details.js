@@ -5,15 +5,14 @@ frappe.ready(function () {
     const gst_number = data.gst_provisional_id;
     const stateName = data.state;
     const country = data.country;
-    let phone=data.mobile_number;
-    if(phone==undefined){
-      frappe.msgprint("Phone Number Is Mandatory")
-      return false; 
+    let phone = data.mobile_number;
+    if (phone == undefined) {
+      frappe.msgprint("Phone Number Is Mandatory");
+      return false;
     }
-    if(country==undefined){
-      frappe.msgprint("Country Is Mandatory")
-      return false; 
-
+    if (country == undefined) {
+      frappe.msgprint("Country Is Mandatory");
+      return false;
     }
 
     if (country === "India") {
@@ -50,78 +49,69 @@ frappe.ready(function () {
 
     return true; // Allow form submission for non-India countries
   };
-  frappe.web_form.on('country', (field, value) => {
+  // filters
+  frappe.web_form.on("country", (field, value) => {
     update_state_filters();
     update_city_filters();
-});
+  });
 
-frappe.web_form.on('state', (field, value) => {
+  frappe.web_form.on("state", (field, value) => {
     update_city_filters();
-});
+  });
 
-  function update_state_filters(){
-    
-    const country_name = frappe.web_form.get_value('country');
+  function update_state_filters() {
+    const country_name = frappe.web_form.get_value("country");
 
     if (country_name) {
-    // let  myurl='api/resource/State';
-        $.ajax({
-            method: 'GET',
-
-            url: `/api/method/vendormanagement.vendor_management.doctype.vendor_state.vendor_state.get_state_filter?country_name=${country_name}`,
-            // url:myurl,
-            success: function (result) {
-                const options = result.message.map(state => {
-                  
-                    return {
-                        'label': state.state , 
-                        'value': state.name 
-                    };
-                });
-
-                console.log('options',options);
-                
-                
-                const stateField = frappe.web_form.get_field('state'); 
-                stateField._data = options;
-                stateField.refresh();
-            }
-        });
-    }
-};
-function update_city_filters(){
-
-  let country = frappe.web_form.get_value('country');
-  let state=frappe.web_form.get_value('state')
-
-  if (country && state) {
-  // let  myurl='api/resource/State';
+      // let  myurl='api/resource/State';
       $.ajax({
-          method: 'GET',
+        method: "GET",
 
-          url: `/api/method/vendormanagement.vendor_management.doctype.vendor_state.vendor_state.get_city_filter?country=${country}&state=${state}`,
-          // url:myurl,
-          success: function (result) {
-              const options = result.message.map(city => {
-                
-                  return {
-                      'label': city.city , 
-                      'value': city.name 
-                  };
-              });
+        url: `/api/method/vendormanagement.vendor_management.doctype.vendor_state.vendor_state.get_state_filter?country_name=${country_name}`,
+        // url:myurl,
+        success: function (result) {
+          const options = result.message.map((state) => {
+            return {
+              label: state.state,
+              value: state.name,
+            };
+          });
 
-              console.log('options',options);
-              
-              
-              const cityField = frappe.web_form.get_field('city'); 
-              cityField._data = options;
-              cityField.refresh();
-          }
+          console.log("options", options);
+
+          const stateField = frappe.web_form.get_field("state");
+          stateField._data = options;
+          stateField.refresh();
+        },
       });
+    }
   }
+  function update_city_filters() {
+    let country = frappe.web_form.get_value("country");
+    let state = frappe.web_form.get_value("state");
 
-}
+    if (country && state) {
+      // let  myurl='api/resource/State';
+      $.ajax({
+        method: "GET",
 
+        url: `/api/method/vendormanagement.vendor_management.doctype.vendor_state.vendor_state.get_city_filter?country=${country}&state=${state}`,
+        // url:myurl,
+        success: function (result) {
+          const options = result.message.map((city) => {
+            return {
+              label: city.city,
+              value: city.name,
+            };
+          });
 
+          console.log("options", options);
+
+          const cityField = frappe.web_form.get_field("city");
+          cityField._data = options;
+          cityField.refresh();
+        },
+      });
+    }
+  }
 });
-

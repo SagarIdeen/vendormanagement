@@ -7,7 +7,8 @@ import requests
 import json
 
 class Vendor_Country(Document):
-	pass
+	def on_update(self):
+		get_country()
 @frappe.whitelist(allow_guest=True)
 def get_country():
 	url="http://35.154.0.123:8080/api/method/vendormanagement.vendor_management.doctype.vendor_country.vendor_country.get_country_list"
@@ -35,7 +36,8 @@ def get_country():
 				else:
 					new_doc=frappe.new_doc("Vendor_Country")
 					new_doc.id=d['id']
-					new_doc.country=d['name']
+					new_doc.country=d['country']
+					new_doc.country_code=d['country_code']
 					new_doc.insert(ignore_permissions=True)
 
 	return response_data

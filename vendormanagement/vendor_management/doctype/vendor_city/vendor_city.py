@@ -8,7 +8,8 @@ import json
 import re
 
 class VendorCity(Document):
-	pass
+	def on_update(self):
+		get_cities()
 # @frappe.whitelist()
 # def get_city():
 # 	city=frappe.db.sql("""select * from `tabvendor_demo_city` where country='India' """,as_dict=1)
@@ -30,11 +31,12 @@ class VendorCity(Document):
 # 	return city
 @frappe.whitelist(allow_guest=True)
 def get_cities():
-	url="http://35.154.0.123:8080/api/method/vendormanagement.vendor_management.doctype.vendor_country.vendor_country.get_city_list"
+	url="http://35.154.0.123:8080/api/method/vendormanagement.vendor_management.doctype.vendor_city.vendor_city.get_city_list"
 	response = requests.request("GET", url,headers = {
 			'Content-Type': 'application/json',
 				})
 	response_data=response.json()
+	print("response_data",response_data)
 	for d in response_data["message"]:
 			city_id = d["city_id"]
 			if id:

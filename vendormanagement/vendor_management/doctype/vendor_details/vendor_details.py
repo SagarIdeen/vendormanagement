@@ -8,6 +8,7 @@ import requests
 import json
 import re
 import os
+from frappe.utils.file_manager import save_url
 
 class VendorDetails(Document):
 	pass

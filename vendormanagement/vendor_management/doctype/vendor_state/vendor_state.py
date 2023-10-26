@@ -8,10 +8,11 @@ import json
 import re
 
 class VendorState(Document):
-	pass
+	def on_update(self):
+		get_state()
 @frappe.whitelist(allow_guest=True)
 def get_state():
-	url="http://35.154.0.123:8080/api/method/vendormanagement.vendor_management.doctype.vendor_country.vendor_country.get_state_list"
+	url="http://35.154.0.123:8080/api/method/vendormanagement.vendor_management.doctype.vendor_state.vendor_state.get_state_list"
 	response = requests.request("GET", url,headers = {
 			'Content-Type': 'application/json',
 				})
