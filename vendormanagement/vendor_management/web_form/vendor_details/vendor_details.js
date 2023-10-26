@@ -5,6 +5,14 @@ frappe.ready(function () {
     const gst_number = data.gst_provisional_id;
     const stateName = data.state;
     const country = data.country;
+    let phone=data.mobile_number;
+    if(phone==undefined){
+      frappe.msgprint("Phone Number Is Mandatory")
+    }
+    if(country==undefined){
+      frappe.msgprint("Country Is Mandatory")
+
+    }
 
     if (country === "India") {
       // PAN Number Validation
@@ -38,7 +46,7 @@ frappe.ready(function () {
       }
     }
 
-    // return true; // Allow form submission for non-India countries
+    return true; // Allow form submission for non-India countries
   };
   frappe.web_form.on('country', (field, value) => {
     update_state_filters();

@@ -17,7 +17,7 @@
  "list_columns": [],
  "login_required": 0,
  "max_attachment_size": 0,
- "modified": "2023-10-25 14:39:27.997859",
+ "modified": "2023-10-26 13:17:19.844376",
  "modified_by": "Administrator",
  "module": "Vendor Management",
  "name": "vendor-details",
@@ -187,7 +187,7 @@
    "max_length": 0,
    "max_value": 0,
    "read_only": 0,
-   "reqd": 1,
+   "reqd": 0,
    "show_in_filter": 0
   },
   {
