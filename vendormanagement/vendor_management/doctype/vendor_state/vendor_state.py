@@ -20,7 +20,7 @@ def get_state():
 	for d in response_data["message"]:
 			state_id  = d["state_id"]
 			if id:
-				existing_doc = frappe.db.exists("Vendor State", {"state_id":state_id })
+				existing_doc = frappe.db.exists("Vendor State",{"state_id":state_id })
 				
 				if existing_doc:
 					country = frappe.get_doc("Vendor State", existing_doc)

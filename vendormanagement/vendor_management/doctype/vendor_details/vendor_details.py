@@ -76,6 +76,7 @@ def receive_and_create_vendor_data(response_data):
 
 		for d in received_data["message"]:
 			name = d["name"]
+			print("ATTT",d['attachements'])
 			if name:
 				existing_doc = frappe.db.exists("Vendor Details", {"name1": name})
 				if existing_doc:
@@ -108,17 +109,78 @@ def receive_and_create_vendor_data(response_data):
 					new_doc.banking_account_number=d['banking_account_number']
 
 					new_doc.insert(ignore_permissions=True)
+					from frappe.sessions import Session
+					# Get the session for the logged-in user
+					session = Session(user=frappe.session.user)
+					# Get the CSRF token from the session
+					csrf_token = session.data.csrf_token
+					print("user",frappe.session.user)
+					print("CSRF Token:", csrf_token)
 
-					# Attach files to the document using the path provided
-					if d['attachements'] is not None:
-						attachment_path =d['attachements']
-						# for attachment_path in d['attachements']:
-						print("attachment_path",attachment_path)
-						filename = os.path.basename(attachment_path)
-						print("filename",filename)
+					# url = "http://localhost:8030/api/method/upload_file"
 					
-					# Save the URL to attach the file
-						save_url(attachment_path,filename,"Vendor Details",new_doc.name, "Home", is_private=1)
+					remote_file_url='http://35.154.0.123:82'+d['attachements']
+					remote_file_response = requests.get(remote_file_url)
+					frappe.get_doc(
+					{
+						"doctype": "File",
+						"attached_to_doctype":'Vendor Details',
+						"attached_to_name": new_doc.name,
+						"attached_to_field": 'attachements',
+						"folder": 'Home',
+						"file_name": remote_file_url.split('/')[-1],
+						"file_url": remote_file_url,
+						"is_private": 1,
+						"content": remote_file_response.content,
+					}
+					).save(ignore_permissions=True)
+
+					# payload = {'is_private': '1',
+					# 'folder': 'Home',
+					# 'doctype': 'Vendor Details',
+					# 'docname': new_doc.name,
+					# 'fieldname': 'file'}
+
+					
+					# files = {
+        			# 	'file': (remote_file_url.split('/')[-1], remote_file_response.content, 'image/jpeg')
+    				# 		}
+					# headers = {
+					# 'Cookie': 'sid=Administrator'
+					# }
+
+					# response = requests.request("POST", url, headers=headers, data=payload, files=files)
+					# print('response',response)
+
+
+
+
+
+					# # Attach files to the document using the path provided
+					# if d['attachements']:
+					# 	url = "http://localhost:8030"
+
+					# 	payload = {"data": '{"pan_number":"F","mobile_number":"FD","din":"F","status":"New","doctype":"Vendor Details","web_form_name":"Vendor Details","attachements":"/private/files/Screenshot (88).png"}',
+					# 	"web_form": 'Vendor Details',
+					# 	"for_payment": 'false',
+					# 	"cmd": 'frappe.website.doctype.web_form.web_form.accept'}
+					# 	files=[
+
+					# 	]
+					# 	headers = {
+					# 	'Cookie': 'sid=Guest'
+					# 	}
+
+					# 	response = requests.request("POST", url, headers=headers, data=payload, files=files)
+					# 	# attachment_path =d['attachements']
+					# # 	attachment_path='/private/files/Screenshot (84).png'
+					# # 	# for attachment_path in d['attachements']:
+					# # 	print("attachment_path",attachment_path)
+					# # 	filename = os.path.basename(attachment_path)
+					# # 	print("filename",filename)
+					
+					# # # Save the URL to attach the file
+					# # 	save_url(attachment_path,filename,"Vendor Details",new_doc.name, "Home", is_private=1)
 
 		return "Data received and processed successfully."
 
