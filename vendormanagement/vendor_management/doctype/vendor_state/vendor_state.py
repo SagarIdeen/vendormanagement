@@ -24,9 +24,9 @@ class VendorState(Document):
         try:
             response = requests.post(url, headers={'Content-Type': 'application/json'}, json=data)
             if response.status_code == 200:
-                print("Country data updated on the external server.")
+                print("State data updated on the external server.")
             else:
-                print("Failed to update country data on the external server. Status code:", response.status_code)
+                print("Failed to update state data on the external server. Status code:", response.status_code)
         except requests.exceptions.RequestException as e:
             print("An error occurred during the request:", e)
 @frappe.whitelist(allow_guest=True)
@@ -54,7 +54,7 @@ def update_state():
            
             new_doc.insert(ignore_permissions=True)
 
-        return "Country data updated or created successfully"
+        return "state data updated or created successfully"
     except Exception as e:
         return "An error occurred while processing the request: " + str(e)
 # def set_state():

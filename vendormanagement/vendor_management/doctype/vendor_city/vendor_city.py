@@ -22,9 +22,9 @@ class VendorCity(Document):
         try:
             response = requests.post(url, headers={'Content-Type': 'application/json'}, json=data)
             if response.status_code == 200:
-                print("Country data updated on the external server.")
+                print("City data updated on the external server.")
             else:
-                print("Failed to update country data on the external server. Status code:", response.status_code)
+                print("Failed to update city data on the external server. Status code:", response.status_code)
         except requests.exceptions.RequestException as e:
             print("An error occurred during the request:", e)
 @frappe.whitelist(allow_guest=True)
@@ -51,7 +51,7 @@ def update_city():
            
             new_doc.insert(ignore_permissions=True)
 
-        return "Country data updated or created successfully"
+        return "City data updated or created successfully"
     except Exception as e:
         return "An error occurred while processing the request: " + str(e)
 # @frappe.whitelist()
