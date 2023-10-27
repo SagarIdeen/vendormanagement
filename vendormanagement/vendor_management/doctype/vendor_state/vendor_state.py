@@ -13,7 +13,7 @@ class VendorState(Document):
 
 	def set_state(self):
 		
-        url = "http://http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_state.vendor_state.update_state"
+        url = "http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_state.vendor_state.update_state"
         data = {
             "state_id": self.state_id,
 			"state":self.state,

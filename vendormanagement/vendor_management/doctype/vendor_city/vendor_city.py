@@ -11,7 +11,7 @@ class VendorCity(Document):
 	def on_update(self):
 		self.set_cities()
 	def set_cities(self):
-		url = "http://http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_city.vendor_city.update_city"
+		url = "http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_city.vendor_city.update_city"
         data = {
 			"city_id":self.city_id,
 			"city":self.city,
