@@ -9,35 +9,81 @@ import re
 
 class VendorState(Document):
 	def on_update(self):
-		get_state()
+		self.set_state()
+
+	def set_state(self):
+		
+        url = "http://http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_state.vendor_state.update_state"
+        data = {
+            "state_id": self.state_id,
+			"state":self.state,
+			"state_code":self.state_code,
+            "country_name": self.country_name
+        }
+
+        try:
+            response = requests.post(url, headers={'Content-Type': 'application/json'}, json=data)
+            if response.status_code == 200:
+                print("Country data updated on the external server.")
+            else:
+                print("Failed to update country data on the external server. Status code:", response.status_code)
+        except requests.exceptions.RequestException as e:
+            print("An error occurred during the request:", e)
 @frappe.whitelist(allow_guest=True)
-def get_state():
-	url="http://35.154.0.123:8080/api/method/vendormanagement.vendor_management.doctype.vendor_state.vendor_state.get_state_list"
-	response = requests.request("GET", url,headers = {
-			'Content-Type': 'application/json',
-				})
-	response_data=response.json()
-	for d in response_data["message"]:
-			state_id  = d["state_id"]
-			if id:
-				existing_doc = frappe.db.exists("Vendor State",{"state_id":state_id })
+def update_state():
+    data = frappe.form_dict
+    try:
+        # Check if a Vendor_Country document with the given ID already exists
+        existing_doc = frappe.get_all("Vendor State", filters={"state_id": data.get("state_id")})
+
+        if existing_doc:
+            # Update the existing document with the new data
+            existing_doc = frappe.get_doc("Vendor State", existing_doc[0].name)
+            existing_doc.state = data.get("state")
+			existing_doc.state_code = data.get("state_code")
+            existing_doc.country_name = data.get("country_name")
+            existing_doc.save(ignore_permissions=True)
+        else:
+            # Create a new Vendor_Country document and enter the data into it
+            new_doc = frappe.new_doc("Vendor State")
+            new_doc.state_id = data.get("state_id")
+			new_doc.state = data.get("state")
+			new_doc.state_code = data.get("state_code")
+
+            new_doc.country_name = data.get("country_name")
+           
+            new_doc.insert(ignore_permissions=True)
+
+        return "Country data updated or created successfully"
+    except Exception as e:
+        return "An error occurred while processing the request: " + str(e)
+# def set_state():
+# 	url="http://http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_state.vendor_state.update_state_list"
+# 	response = requests.request("GET", url,headers = {
+# 			'Content-Type': 'application/json',
+# 				})
+# 	response_data=response.json()
+# 	for d in response_data["message"]:
+# 			state_id  = d["state_id"]
+# 			if id:
+# 				existing_doc = frappe.db.exists("Vendor State",{"state_id":state_id })
 				
-				if existing_doc:
-					country = frappe.get_doc("Vendor State", existing_doc)
-					# if country.country != d['name']:
-					# 	print("country.country",d['name'],country.country)
+# 				if existing_doc:
+# 					country = frappe.get_doc("Vendor State", existing_doc)
+# 					# if country.country != d['name']:
+# 					# 	print("country.country",d['name'],country.country)
 						
 
 
-				else:
-					new_doc=frappe.new_doc("Vendor State")
-					new_doc.state_id =d['state_id']
-					new_doc.state =d['state']
-					new_doc.state_code=d['state_code']
-					new_doc.country_name=d['country_name']
-					new_doc.insert(ignore_permissions=True)
+# 				else:
+# 					new_doc=frappe.new_doc("Vendor State")
+# 					new_doc.state_id =d['state_id']
+# 					new_doc.state =d['state']
+# 					new_doc.state_code=d['state_code']
+# 					new_doc.country_name=d['country_name']
+# 					new_doc.insert(ignore_permissions=True)
 
-	return response_data
+# 	return response_data
 
 @frappe.whitelist(allow_guest=True)
 def get_state_list():
