@@ -1,48 +1,56 @@
-# Copyright (c) 2023, Ideenkreice and contributors
-# For license information, please see license.txt
-
 import frappe
 from frappe.model.document import Document
 import requests
 import json
 
 class Vendor_Country(Document):
-	def on_update(self):
-		get_country()
+    def on_update(self):
+        self.set_country()
+
+    def set_country(self):
+        url = "http://http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_country.vendor_country.update_country"
+        data = {
+            "id": self.id,
+            "country": self.country,
+            "country_code": self.country_code
+        }
+
+        try:
+            response = requests.post(url, headers={'Content-Type': 'application/json'}, json=data)
+            if response.status_code == 200:
+                print("Country data updated on the external server.")
+            else:
+                print("Failed to update country data on the external server. Status code:", response.status_code)
+        except requests.exceptions.RequestException as e:
+            print("An error occurred during the request:", e)
+
 @frappe.whitelist(allow_guest=True)
-def get_country():
-	url="http://35.154.0.123:8080/api/method/vendormanagement.vendor_management.doctype.vendor_country.vendor_country.get_country_list"
-	response = requests.request("GET", url,headers = {
-			'Content-Type': 'application/json',
-				})
-	response_data=response.json()
-	for d in response_data["message"]:
-			id = d["id"]
-			if id:
-				existing_doc = frappe.db.exists("Vendor_Country", {"id":id})
-				
-				if existing_doc:
-					country = frappe.get_doc("Vendor_Country", existing_doc)
-					if country.country != d['name']:
-						print("country.country",d['name'],country.country)
-						# frappe.rename_doc("demo_country",country.country, d['name'],merge=merge)
-						
-						# # # Update the existing document with new data
-						# # country.country = d['name']
-						# # # Update other fields as needed
-						# # country.save(ignore_permissions=True)
+def update_country():
+    data = frappe.form_dict
+    try:
+        # Check if a Vendor_Country document with the given ID already exists
+        existing_doc = frappe.get_all("demo_country", filters={"name": data.get("country")})
 
+        if existing_doc:
+            # Update the existing document with the new data
+            existing_doc = frappe.get_doc("demo_country", existing_doc[0].name)
+            existing_doc.id = data.get("id")
+            existing_doc.country_code = data.get("country_code")
+            existing_doc.save(ignore_permissions=True)
+        else:
+            # Create a new Vendor_Country document and enter the data into it
+            new_doc = frappe.new_doc("demo_country")
+            new_doc.id = data.get("id")
+            new_doc.country = data.get("country")
+            new_doc.country_code = data.get("country_code")
+            new_doc.insert(ignore_permissions=True)
 
-				else:
-					new_doc=frappe.new_doc("Vendor_Country")
-					new_doc.id=d['id']
-					new_doc.country=d['country']
-					new_doc.country_code=d['country_code']
-					new_doc.insert(ignore_permissions=True)
-
-	return response_data
+        return "Country data updated or created successfully"
+    except Exception as e:
+        return "An error occurred while processing the request: " + str(e)
 
 @frappe.whitelist(allow_guest=True)
 def get_country_list():
-	country_list=frappe.db.sql("""select * from `tabVendor_Country` """,as_dict=1)
-	return country_list
+    print("self")
+    country_list = frappe.get_all("Vendor_Country", fields=["id", "country", "country_code"])
+    return country_list
