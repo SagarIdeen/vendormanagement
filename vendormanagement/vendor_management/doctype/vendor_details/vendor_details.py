@@ -15,8 +15,10 @@ class VendorDetails(Document):
 				
 @frappe.whitelist()
 def duplicate(name,pan_number,din,mobile):
-	vendor_data=frappe.db.sql("""select name,din,mobile_number,pan_number,status from `tabVendor Details` where name !=%(name)s and ( din=%(din)s or pan_number=%(pan_number)s 
-		or mobile_number=%(mobile_number)s)""",values={'din':din,'pan_number':pan_number,'mobile_number':mobile,'name':name},as_dict=1)
+	vendor_data=frappe.db.sql("""select name,din,mobile_number,pan_number,status from `tabVendor Details` where name !=%(name)s and
+	 ( (din = %(din)s AND din != '')
+            OR (pan_number = %(pan_number)s AND pan_number != '')
+            OR (mobile_number = %(mobile_number)s AND mobile_number != ''))""",values={'din':din,'pan_number':pan_number,'mobile_number':mobile,'name':name},as_dict=1)
 	
 
 	for d in vendor_data:
@@ -33,9 +35,9 @@ def duplicate(name,pan_number,din,mobile):
 				description.append("Pan Number")
 		if d.mobile_number==mobile:
 			description.append("Mobile Number")
-		description_str = ', '.join(description)+" Duplicated"
-		
-		d['description'] = description_str
+		if description:
+			description_str = ', '.join(description)+" Duplicated"
+			d['description'] = description_str
 	return vendor_data
 
 
@@ -121,6 +123,7 @@ def receive_and_create_vendor_data(response_data):
 					
 					remote_file_url='http://35.154.0.123:82'+d['attachements']
 					remote_file_response = requests.get(remote_file_url)
+					print("remote_file_response",remote_file_response)
 					
 					frappe.get_doc(
 					{
