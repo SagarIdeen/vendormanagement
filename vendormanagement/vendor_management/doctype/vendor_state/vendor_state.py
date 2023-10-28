@@ -8,17 +8,17 @@ import json
 import re
 
 class VendorState(Document):
-	def on_update(self):
-		self.set_state()
+    def on_update(self):
+        self.set_state()
 
-	def set_state(self):
-		
+    def set_state(self):
+
         url = "http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_state.vendor_state.update_state"
         data = {
-            "state_id": self.state_id,
-			"state":self.state,
-			"state_code":self.state_code,
-            "country_name": self.country_name
+        "state_id": self.state_id,
+        "state":self.state,
+        "state_code":self.state_code,
+        "country_name": self.country_name
         }
 
         try:
@@ -28,7 +28,7 @@ class VendorState(Document):
             else:
                 print("Failed to update state data on the external server. Status code:", response.status_code)
         except requests.exceptions.RequestException as e:
-            print("An error occurred during the request:", e)
+                print("An error occurred during the request:", e)
 @frappe.whitelist(allow_guest=True)
 def update_state():
     data = frappe.form_dict
@@ -40,18 +40,18 @@ def update_state():
             # Update the existing document with the new data
             existing_doc = frappe.get_doc("Vendor State", existing_doc[0].name)
             existing_doc.state = data.get("state")
-			existing_doc.state_code = data.get("state_code")
+            existing_doc.state_code = data.get("state_code")
             existing_doc.country_name = data.get("country_name")
             existing_doc.save(ignore_permissions=True)
         else:
             # Create a new Vendor_Country document and enter the data into it
             new_doc = frappe.new_doc("Vendor State")
             new_doc.state_id = data.get("state_id")
-			new_doc.state = data.get("state")
-			new_doc.state_code = data.get("state_code")
+            new_doc.state = data.get("state")
+            new_doc.state_code = data.get("state_code")
 
             new_doc.country_name = data.get("country_name")
-           
+
             new_doc.insert(ignore_permissions=True)
 
         return "state data updated or created successfully"

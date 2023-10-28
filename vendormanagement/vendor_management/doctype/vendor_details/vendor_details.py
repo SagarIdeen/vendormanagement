@@ -121,6 +121,7 @@ def receive_and_create_vendor_data(response_data):
 					
 					remote_file_url='http://35.154.0.123:82'+d['attachements']
 					remote_file_response = requests.get(remote_file_url)
+					
 					frappe.get_doc(
 					{
 						"doctype": "File",
@@ -129,7 +130,8 @@ def receive_and_create_vendor_data(response_data):
 						"attached_to_field": 'attachements',
 						"folder": 'Home',
 						"file_name": remote_file_url.split('/')[-1],
-						"file_url": remote_file_url,
+						# "file_url": remote_file_url,
+						"file_url": d['attachements'],
 						"is_private": 1,
 						"content": remote_file_response.content,
 					}
