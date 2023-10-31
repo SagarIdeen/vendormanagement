@@ -1,5 +1,5 @@
 frappe.ready(function () {
-  frappe.web_form.validate = () => {
+  frappe.web_form.on_submit = () => {
     const data = frappe.web_form.get_values();
     const pan_number = data.pan_number;
     const gst_number = data.gst_provisional_id;

@@ -17,7 +17,7 @@
  "list_columns": [],
  "login_required": 0,
  "max_attachment_size": 0,
- "modified": "2023-10-26 13:17:19.844376",
+ "modified": "2023-10-31 16:37:40.896925",
  "modified_by": "Administrator",
  "module": "Vendor Management",
  "name": "vendor-details",
@@ -75,7 +75,7 @@
    "max_length": 0,
    "max_value": 0,
    "read_only": 0,
-   "reqd": 0,
+   "reqd": 1,
    "show_in_filter": 0
   },
   {
@@ -88,7 +88,7 @@
    "max_value": 0,
    "options": "Vendor_Country",
    "read_only": 0,
-   "reqd": 0,
+   "reqd": 1,
    "show_in_filter": 0
   },
   {
@@ -187,7 +187,7 @@
    "max_length": 0,
    "max_value": 0,
    "read_only": 0,
-   "reqd": 0,
+   "reqd": 1,
    "show_in_filter": 0
   },
   {
@@ -364,19 +364,6 @@
   },
   {
    "allow_read_on_all_link_options": 0,
-   "fieldname": "created_by",
-   "fieldtype": "Link",
-   "hidden": 0,
-   "label": "Created by",
-   "max_length": 0,
-   "max_value": 0,
-   "options": "User",
-   "read_only": 0,
-   "reqd": 0,
-   "show_in_filter": 0
-  },
-  {
-   "allow_read_on_all_link_options": 0,
    "default": "New",
    "fieldname": "status",
    "fieldtype": "Select",
@@ -385,18 +372,6 @@
    "max_length": 0,
    "max_value": 0,
    "options": "New\nApproved\nRejected",
-   "read_only": 1,
-   "reqd": 0,
-   "show_in_filter": 0
-  },
-  {
-   "allow_read_on_all_link_options": 0,
-   "fieldname": "name1",
-   "fieldtype": "Data",
-   "hidden": 0,
-   "label": "Name",
-   "max_length": 0,
-   "max_value": 0,
    "read_only": 1,
    "reqd": 0,
    "show_in_filter": 0

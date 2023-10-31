@@ -49,7 +49,7 @@ def update_country():
     except Exception as e:
         return "An error occurred while processing the request: " + str(e)
 
-@frappe.whitelist(allow_guest=True)
+@frappe.whitelist()
 def get_country_list():
     print("self")
     country_list = frappe.get_all("Vendor_Country", fields=["id", "country", "country_code"])

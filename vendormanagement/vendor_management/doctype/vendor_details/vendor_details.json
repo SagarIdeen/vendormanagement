@@ -39,6 +39,7 @@
   "created_by",
   "status",
   "attachements",
+  "preview",
   "section_break_8wpuy",
   "name1"
  ],
@@ -218,11 +219,16 @@
    "label": "Country",
    "options": "Vendor_Country",
    "reqd": 1
+  },
+  {
+   "fieldname": "preview",
+   "fieldtype": "Button",
+   "label": "Preview"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-26 12:30:20.623415",
+ "modified": "2023-10-31 17:06:28.534590",
  "modified_by": "Administrator",
  "module": "Vendor Management",
  "name": "Vendor Details",

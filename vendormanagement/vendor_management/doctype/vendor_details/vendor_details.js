@@ -14,6 +14,11 @@ frappe.ui.form.on('Vendor Details', {
 		frm.events.show_duplication(frm)
 
 	},
+	preview:function(frm){
+		window.open(frm.doc.attachements);
+
+	},
+
 	on_submit: function (frm) {
 		console.log('test after save');
 	},

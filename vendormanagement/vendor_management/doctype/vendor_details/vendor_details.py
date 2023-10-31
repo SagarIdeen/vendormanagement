@@ -121,24 +121,31 @@ def receive_and_create_vendor_data(response_data):
 
 					# url = "http://localhost:8030/api/method/upload_file"
 					
-					remote_file_url='http://35.154.0.123:82'+d['attachements']
-					remote_file_response = requests.get(remote_file_url)
-					print("remote_file_response",remote_file_response)
+					if d['attachements']:
+						regex= 'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\), ]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'
+						checkURL= re.findall(regex,d['attachements'])
+						if checkURL:
+							remote_file_url=d['attachements']
+						else:
 					
-					frappe.get_doc(
-					{
-						"doctype": "File",
-						"attached_to_doctype":'Vendor Details',
-						"attached_to_name": new_doc.name,
-						"attached_to_field": 'attachements',
-						"folder": 'Home',
-						"file_name": remote_file_url.split('/')[-1],
-						# "file_url": remote_file_url,
-						"file_url": d['attachements'],
-						"is_private": 1,
-						"content": remote_file_response.content,
-					}
-					).save(ignore_permissions=True)
+							remote_file_url='http://35.154.0.123:82'+d['attachements']
+						remote_file_response = requests.get(remote_file_url)
+						print("remote_file_response",remote_file_response)
+						
+						frappe.get_doc(
+						{
+							"doctype": "File",
+							"attached_to_doctype":'Vendor Details',
+							"attached_to_name": new_doc.name,
+							"attached_to_field": 'attachements',
+							"folder": 'Home',
+							"file_name": remote_file_url.split('/')[-1],
+							# "file_url": remote_file_url,
+							"file_url": d['attachements'],
+							"is_private": 1,
+							"content": remote_file_response.content,
+						}
+						).save(ignore_permissions=True)
 
 					# payload = {'is_private': '1',
 					# 'folder': 'Home',
