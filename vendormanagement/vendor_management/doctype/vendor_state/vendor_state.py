@@ -93,7 +93,7 @@ def get_state_list():
 def get_state_filter(country_name):
 	state_list=frappe.db.sql("""select * from `tabVendor State` where country_name=%(country_name)s """,values={'country_name':country_name},as_dict=1)
 	return state_list
-@frappe.whitelist()
+@frappe.whitelist(allow_guest=True)
 def get_city_filter(country,state):
 	print(country,state)
 	city_list =frappe.db.sql("""select * from `tabVendor City` where country=%(country)s and state=%(state)s """,

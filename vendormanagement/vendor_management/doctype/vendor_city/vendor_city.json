@@ -30,7 +30,8 @@
   {
    "fieldname": "city_id",
    "fieldtype": "Data",
-   "label": "City Id"
+   "label": "City Id",
+   "unique": 1
   },
   {
    "fieldname": "city",
@@ -115,7 +116,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-20 17:03:04.103136",
+ "modified": "2023-10-31 11:07:57.316801",
  "modified_by": "Administrator",
  "module": "Vendor Management",
  "name": "Vendor City",

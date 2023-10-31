@@ -78,14 +78,14 @@ def receive_and_create_vendor_data(response_data):
 
 		for d in received_data["message"]:
 			name = d["name"]
-			print("ATTT",d['attachements'])
 			if name:
 				existing_doc = frappe.db.exists("Vendor Details", {"name1": name})
 				if existing_doc:
-					print("Document with name {} already exists.".format(name))
+					print(" if Document with name {} already exists.".format(name))
 
 				else:
 					new_doc=frappe.new_doc("Vendor Details")
+					print("else Document with name {} already exists.".format(name))
 					new_doc.name1=name
 					new_doc.address1=d['address1']
 					new_doc.address_2=d['address_2']
