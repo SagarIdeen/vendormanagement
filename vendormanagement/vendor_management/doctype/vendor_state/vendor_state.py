@@ -11,6 +11,21 @@ class VendorState(Document):
     def on_update(self):
         # self.set_state()
         frappe.enqueue(self.set_state)
+    def on_trash(self):
+        self.remove_state()
+    def remove_state(self):
+        data={
+			"name":self.name
+
+		}
+        url="http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_city.vendor_city.get_state_remove"
+        # url="http://localhost:8030/api/method/vendormanagement.vendor_management.doctype.vendor_details.vendor_details.get_vendor_list"
+        response = requests.request("DELETE", url,headers = {
+            'Content-Type': 'application/json',
+            },data=data)
+        response_data=response.json()
+        print("Response:",response_data)
+        return response_data
 
     def set_state(self):
 
@@ -84,7 +99,10 @@ def update_state():
 # 					new_doc.insert(ignore_permissions=True)
 
 # 	return response_data
-
+@frappe.whitelist()
+def get_state_remove(data):
+	frappe.delete_doc('Vendor State',data)
+	
 @frappe.whitelist(allow_guest=True)
 def get_state_list():
 	state_list=frappe.db.sql("""select * from `tabVendor State` """,as_dict=1)

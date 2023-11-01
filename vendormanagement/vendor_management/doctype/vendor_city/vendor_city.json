@@ -1,7 +1,6 @@
 {
  "actions": [],
  "allow_import": 1,
- "allow_rename": 1,
  "autoname": "format:{city}-{city_code}-{state_code}-{country_code}",
  "creation": "2023-10-20 12:22:44.377834",
  "default_view": "List",
@@ -45,7 +44,7 @@
    "fieldname": "country",
    "fieldtype": "Link",
    "label": "Country",
-   "options": "Vendor_Country"
+   "options": "Vendor Country"
   },
   {
    "fetch_from": "country.country_code",
@@ -89,7 +88,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-11-01 10:43:57.274421",
+ "modified": "2023-11-01 16:27:23.305131",
  "modified_by": "Administrator",
  "module": "Vendor Management",
  "name": "Vendor City",

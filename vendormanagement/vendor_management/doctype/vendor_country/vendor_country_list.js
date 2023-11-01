@@ -1,4 +1,4 @@
-// frappe.listview_settings['Vendor_Country'] = {
+// frappe.listview_settings['Vendor Country'] = {
 //     onload: function (listview) {
 //         // Add a custom button to the list view toolbar
 //         listview.page.add_button(__("GET COUNTRY"), function () {

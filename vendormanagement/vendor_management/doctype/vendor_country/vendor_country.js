@@ -1,7 +1,7 @@
 // Copyright (c) 2023, Ideenkreice and contributors
 // For license information, please see license.txt
 
-frappe.ui.form.on('Vendor_Country', {
+frappe.ui.form.on('Vendor Country', {
 	// refresh: function(frm) {
 
 	// }

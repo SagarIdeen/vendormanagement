@@ -10,6 +10,21 @@ import re
 class VendorCity(Document):
 	def on_update(self):
 		frappe.enqueue(self.set_cities)
+	def on_trash(self):
+		self.remove_city()
+	def remove_city(self):
+		url="http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_city.vendor_city.get_city_remove"
+	# url="http://localhost:8030/api/method/vendormanagement.vendor_management.doctype.vendor_details.vendor_details.get_vendor_list"
+		data={
+			name:self.name
+
+		}
+		response = requests.request("DELETE", url,headers = {
+				'Content-Type': 'application/json',
+					},data=data)
+		response_data=response.json()
+		print("Response:",response_data)
+		return response_data
 		# self.set_cities()
 	def set_cities(self):
 		url = "http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_city.vendor_city.update_city"
@@ -29,6 +44,7 @@ class VendorCity(Document):
 				print("Failed to update city data on the external server. Status code:", response.status_code)
 		except requests.exceptions.RequestException as e:
 			print("An error occurred during the request:", e)
+
 @frappe.whitelist(allow_guest=True)
 def update_city():
 	data = frappe.form_dict
@@ -106,10 +122,18 @@ def update_city():
 
 # 	return response_data
 
-@frappe.whitelist(allow_guest=True)
+@frappe.whitelist()
 def get_city_list():
 	city_list=frappe.db.sql("""select * from `tabVendor City` """,as_dict=1)
 	return city_list
+@frappe.whitelist()
+def get_city_remove(data):
+	
+	frappe.delete_doc('Vendor City',data)
+
+
+	
+
 
 @frappe.whitelist()
 def get_state(doctype, txt, searchfield, start, page_len, filters):

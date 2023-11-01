@@ -36,7 +36,7 @@
  "modified": "2023-11-01 10:57:33.461898",
  "modified_by": "Administrator",
  "module": "Vendor Management",
- "name": "Vendor_Country",
+ "name": "Vendor Country",
  "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [

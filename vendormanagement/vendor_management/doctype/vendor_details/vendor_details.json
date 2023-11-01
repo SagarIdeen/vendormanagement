@@ -217,7 +217,7 @@
    "fieldname": "country",
    "fieldtype": "Link",
    "label": "Country",
-   "options": "Vendor_Country",
+   "options": "Vendor Country",
    "reqd": 1
   },
   {
@@ -228,7 +228,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-31 17:06:28.534590",
+ "modified": "2023-11-01 16:27:23.518205",
  "modified_by": "Administrator",
  "module": "Vendor Management",
  "name": "Vendor Details",

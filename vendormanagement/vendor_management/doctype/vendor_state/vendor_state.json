@@ -1,7 +1,6 @@
 {
  "actions": [],
  "allow_import": 1,
- "allow_rename": 1,
  "autoname": "format:{state}-{state_code}-{country_code}",
  "creation": "2023-10-19 17:23:31.885232",
  "default_view": "List",
@@ -35,7 +34,7 @@
    "fieldname": "country_name",
    "fieldtype": "Link",
    "label": "Country Name",
-   "options": "Vendor_Country"
+   "options": "Vendor Country"
   },
   {
    "fieldname": "state_code",
@@ -65,7 +64,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-11-01 10:59:21.843046",
+ "modified": "2023-11-01 16:27:23.037193",
  "modified_by": "Administrator",
  "module": "Vendor Management",
  "name": "Vendor State",
