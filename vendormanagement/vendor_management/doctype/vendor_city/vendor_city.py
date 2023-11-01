@@ -14,7 +14,8 @@ class VendorCity(Document):
 	def set_cities(self):
 		url = "http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_city.vendor_city.update_city"
 		data = {
-		"city_id":self.city_id,
+		"name":self.name,
+		"city_code":self.city_code,
 		"city":self.city,
 		"state":self.state,
 		"country": self.country
@@ -33,12 +34,13 @@ def update_city():
 	data = frappe.form_dict
 	try:
 	# Check if a Vendor_Country document with the given ID already exists
-		existing_doc = frappe.get_all("Vendor City", filters={"city_id": data.get("city_id")})
+		existing_doc = frappe.get_all("Vendor City", filters={"name": data.get("name")})
 
 		if existing_doc:
 		# Update the existing document with the new data
 			existing_doc = frappe.get_doc("Vendor City", existing_doc[0].name)
 			existing_doc.city = data.get("city")
+			existing_doc.city_code = data.get("city_code")
 			existing_doc.state = data.get("state")
 			existing_doc.country = data.get("country")
 			existing_doc.save(ignore_permissions=True)
@@ -46,7 +48,7 @@ def update_city():
 		# Create a new Vendor_Country document and enter the data into it
 			new_doc = frappe.new_doc("Vendor City")
 			new_doc.state = data.get("state")
-			new_doc.city_id = data.get("city_id")
+			new_doc.city_code = data.get("city_code")
 			new_doc.city = data.get("city")
 			new_doc.country= data.get("country")
 

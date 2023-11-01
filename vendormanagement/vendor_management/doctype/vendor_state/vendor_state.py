@@ -16,7 +16,7 @@ class VendorState(Document):
 
         url = "http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_state.vendor_state.update_state"
         data = {
-        "state_id": self.state_id,
+        "name":self.name,
         "state":self.state,
         "state_code":self.state_code,
         "country_name": self.country_name
@@ -35,7 +35,7 @@ def update_state():
     data = frappe.form_dict
     try:
         # Check if a Vendor_Country document with the given ID already exists
-        existing_doc = frappe.get_all("Vendor State", filters={"state_id": data.get("state_id")})
+        existing_doc = frappe.get_all("Vendor State", filters={"name": data.get("name")})
 
         if existing_doc:
             # Update the existing document with the new data
@@ -47,7 +47,6 @@ def update_state():
         else:
             # Create a new Vendor_Country document and enter the data into it
             new_doc = frappe.new_doc("Vendor State")
-            new_doc.state_id = data.get("state_id")
             new_doc.state = data.get("state")
             new_doc.state_code = data.get("state_code")
 

@@ -12,7 +12,7 @@ class Vendor_Country(Document):
     def set_country(self):
         url = "http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_country.vendor_country.update_country"
         data = {
-            "id": self.id,
+            "name":self.name,
             "country": self.country,
             "country_code": self.country_code
         }
@@ -36,13 +36,11 @@ def update_country():
         if existing_doc:
             # Update the existing document with the new data
             existing_doc = frappe.get_doc("Vendor_Country", existing_doc[0].name)
-            existing_doc.id = data.get("id")
             existing_doc.country_code = data.get("country_code")
             existing_doc.save(ignore_permissions=True)
         else:
             # Create a new Vendor_Country document and enter the data into it
             new_doc = frappe.new_doc("Vendor_Country")
-            new_doc.id = data.get("id")
             new_doc.country = data.get("country")
             new_doc.country_code = data.get("country_code")
             new_doc.insert(ignore_permissions=True)

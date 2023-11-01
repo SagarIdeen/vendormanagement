@@ -2,7 +2,7 @@
  "actions": [],
  "allow_import": 1,
  "allow_rename": 1,
- "autoname": "format:{city}-{city_id}",
+ "autoname": "format:{city}-{city_code}-{state_code}-{country_code}",
  "creation": "2023-10-20 12:22:44.377834",
  "default_view": "List",
  "doctype": "DocType",
@@ -12,27 +12,17 @@
   "country_section",
   "country",
   "column_break_w3ghi",
-  "country_id",
-  "column_break_k2v8m",
   "country_code",
   "state_section",
   "state",
   "column_break_a66ed",
-  "state_id",
-  "column_break_lscbq",
   "state_code",
   "city_section",
   "city",
-  "column_break_ft95s",
-  "city_id"
+  "column_break_xwkve",
+  "city_code"
  ],
  "fields": [
-  {
-   "fieldname": "city_id",
-   "fieldtype": "Data",
-   "label": "City Id",
-   "unique": 1
-  },
   {
    "fieldname": "city",
    "fieldtype": "Data",
@@ -45,24 +35,10 @@
    "options": "Vendor State"
   },
   {
-   "fetch_from": "state.state_id",
-   "fieldname": "state_id",
-   "fieldtype": "Data",
-   "label": "State Id",
-   "read_only": 1
-  },
-  {
    "fetch_from": "state.state_code",
    "fieldname": "state_code",
    "fieldtype": "Data",
    "label": "State Code",
-   "read_only": 1
-  },
-  {
-   "fetch_from": "country.id",
-   "fieldname": "country_id",
-   "fieldtype": "Data",
-   "label": "Country Id",
    "read_only": 1
   },
   {
@@ -84,10 +60,6 @@
    "label": "City"
   },
   {
-   "fieldname": "column_break_k2v8m",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "state_section",
    "fieldtype": "Section Break",
    "label": "State"
@@ -106,17 +78,18 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "column_break_lscbq",
+   "fieldname": "column_break_xwkve",
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "column_break_ft95s",
-   "fieldtype": "Column Break"
+   "fieldname": "city_code",
+   "fieldtype": "Data",
+   "label": "City Code"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-10-31 11:07:57.316801",
+ "modified": "2023-11-01 10:43:57.274421",
  "modified_by": "Administrator",
  "module": "Vendor Management",
  "name": "Vendor City",
