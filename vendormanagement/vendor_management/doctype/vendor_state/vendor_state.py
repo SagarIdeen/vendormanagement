@@ -9,7 +9,8 @@ import re
 
 class VendorState(Document):
     def on_update(self):
-        self.set_state()
+        # self.set_state()
+        frappe.enqueue(self.set_state)
 
     def set_state(self):
 

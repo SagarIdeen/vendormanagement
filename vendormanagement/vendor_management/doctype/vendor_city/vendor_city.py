@@ -9,7 +9,8 @@ import re
 
 class VendorCity(Document):
 	def on_update(self):
-		self.set_cities()
+		frappe.enqueue(self.set_cities)
+		# self.set_cities()
 	def set_cities(self):
 		url = "http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_city.vendor_city.update_city"
 		data = {

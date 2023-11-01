@@ -9,6 +9,7 @@ import json
 import re
 import os
 from frappe.utils.file_manager import save_url
+from frappe.utils.background_jobs import enqueue
 
 class VendorDetails(Document):
 	pass
@@ -66,14 +67,22 @@ def get_vendor_data():
 				})
 	response_data=response.json()
 	print("Response:",response_data)
-	receive_and_create_vendor_data(response_data)
+	enqueue_receive_and_create_vendor_data(response_data)
 	return response_data
+
+@frappe.whitelist(allow_guest=True)	
+def enqueue_receive_and_create_vendor_data(response_data):
+    frappe.enqueue(
+       receive_and_create_vendor_data,
+        data=response_data,
+         
+    )
 	
 
 @frappe.whitelist(allow_guest=True)
-def receive_and_create_vendor_data(response_data):
+def receive_and_create_vendor_data(data):
 	# Deserialize the received data
-		received_data = response_data
+		received_data = data
 		print("received_data",received_data)
 
 		for d in received_data["message"]:
@@ -111,13 +120,7 @@ def receive_and_create_vendor_data(response_data):
 					new_doc.banking_account_number=d['banking_account_number']
 
 					new_doc.insert(ignore_permissions=True)
-					from frappe.sessions import Session
-					# Get the session for the logged-in user
-					session = Session(user=frappe.session.user)
-					# Get the CSRF token from the session
-					csrf_token = session.data.csrf_token
-					print("user",frappe.session.user)
-					print("CSRF Token:", csrf_token)
+					
 
 					# url = "http://localhost:8030/api/method/upload_file"
 					

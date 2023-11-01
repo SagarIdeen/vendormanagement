@@ -2,10 +2,12 @@ import frappe
 from frappe.model.document import Document
 import requests
 import json
+from frappe.utils.background_jobs import enqueue
 
 class Vendor_Country(Document):
     def on_update(self):
-        self.set_country()
+        # self.set_country()
+        frappe.enqueue(self.set_country)
 
     def set_country(self):
         url = "http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_country.vendor_country.update_country"
