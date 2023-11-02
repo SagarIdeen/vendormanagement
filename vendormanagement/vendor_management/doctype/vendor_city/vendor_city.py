@@ -126,8 +126,8 @@ def update_city():
 def get_city_list():
 	city_list=frappe.db.sql("""select * from `tabVendor City` """,as_dict=1)
 	return city_list
-@frappe.whitelist()
-def get_city_remove(allow_guest=True):
+@frappe.whitelist(allow_guest=True)
+def get_city_remove():
 	data=frappe.form_dict
 	
 	frappe.delete_doc('Vendor City',data.name)
