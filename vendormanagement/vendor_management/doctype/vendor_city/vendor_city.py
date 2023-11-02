@@ -27,23 +27,24 @@ class VendorCity(Document):
 		return response_data
 		# self.set_cities()
 	def set_cities(self):
-		url = "http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_city.vendor_city.update_city"
-		data = {
-		"name":self.name,
-		"city_code":self.city_code,
-		"city":self.city,
-		"state":self.state,
-		"country": self.country
-		}
+		if self.status=="unsync":
+			url = "http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_city.vendor_city.update_city"
+			data = {
+			"name":self.name,
+			"city_code":self.city_code,
+			"city":self.city,
+			"state":self.state,
+			"country": self.country
+			}
 
-		try:
-			response = requests.post(url, headers={'Content-Type': 'application/json'}, json=data)
-			if response.status_code == 200:
-				print("City data updated on the external server.")
-			else:
-				print("Failed to update city data on the external server. Status code:", response.status_code)
-		except requests.exceptions.RequestException as e:
-			print("An error occurred during the request:", e)
+			try:
+				response = requests.post(url, headers={'Content-Type': 'application/json'}, json=data)
+				if response.status_code == 200:
+					print("City data updated on the external server.")
+				else:
+					print("Failed to update city data on the external server. Status code:", response.status_code)
+			except requests.exceptions.RequestException as e:
+				print("An error occurred during the request:", e)
 
 @frappe.whitelist(allow_guest=True)
 def update_city():
@@ -67,6 +68,7 @@ def update_city():
 			new_doc.city_code = data.get("city_code")
 			new_doc.city = data.get("city")
 			new_doc.country= data.get("country")
+			new_doc.status="sync"
 
 			new_doc.insert(ignore_permissions=True)
 

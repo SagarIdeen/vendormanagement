@@ -45,21 +45,24 @@ class VendorCountry(Document):
         return response_data
 
     def set_country(self):
-        url = "http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_country.vendor_country.update_country"
-        data = {
-            "name":self.name,
-            "country": self.country,
-            "country_code": self.country_code
-        }
+        
+        if self.status=="unsync":
+            url = "http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_country.vendor_country.update_country"
+            # url = "http://localhost:8030/api/method/demo.demo.doctype.demo_country.demo_country.update_country"
+            data = {
+                "name":self.name,
+                "country": self.country,
+                "country_code": self.country_code
+            }
 
-        try:
-            response = requests.post(url, headers={'Content-Type': 'application/json'}, json=data)
-            if response.status_code == 200:
-                print("Country data updated on the external server.")
-            else:
-                print("Failed to update country data on the external server. Status code:", response.status_code)
-        except requests.exceptions.RequestException as e:
-            print("An error occurred during the request:", e)
+            try:
+                response = requests.post(url, headers={'Content-Type': 'application/json'}, json=data)
+                if response.status_code == 200:
+                    print("Country data updated on the external server.")
+                else:
+                    print("Failed to update country data on the external server. Status code:", response.status_code)
+            except requests.exceptions.RequestException as e:
+                print("An error occurred during the request:", e)
 @frappe.whitelist(allow_guest=True)
 def rename_country():
     data = frappe.form_dict
@@ -86,6 +89,7 @@ def update_country():
             new_doc = frappe.new_doc("Vendor Country")
             new_doc.country = data.get("country")
             new_doc.country_code = data.get("country_code")
+            new_doc.status="sync"
             new_doc.insert(ignore_permissions=True)
 
         return "Country data updated or created successfully"

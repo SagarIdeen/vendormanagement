@@ -15,7 +15,8 @@
   "section_break_d2kg9",
   "state",
   "column_break_0lqkt",
-  "state_code"
+  "state_code",
+  "status"
  ],
  "fields": [
   {
@@ -60,11 +61,18 @@
   {
    "fieldname": "column_break_0lqkt",
    "fieldtype": "Column Break"
+  },
+  {
+   "default": "unsync",
+   "fieldname": "status",
+   "fieldtype": "Data",
+   "label": "status",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-11-01 16:27:23.037193",
+ "modified": "2023-11-02 16:56:09.607700",
  "modified_by": "Administrator",
  "module": "Vendor Management",
  "name": "Vendor State",
