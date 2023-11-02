@@ -11,7 +11,7 @@ class VendorCountry(Document):
         frappe.enqueue(self.set_country)
     def after_rename(self, old, new, merge=False):
         # rename_country()
-        # url = "http://localhost:8030/api/method/vendormanagement.vendor_management.doctype.vendor_country.vendor_country.rename_country"
+        
         url = "http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_country.vendor_country.rename_country"
         data = {
             "old":old,
@@ -32,14 +32,14 @@ class VendorCountry(Document):
         self.remove_country()
     def remove_country(self):
         data={
-        name:self.name
+        "name":self.name
 
         }
         url="http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_city.vendor_city.get_country_remove"
-        # url="http://localhost:8030/api/method/vendormanagement.vendor_management.doctype.vendor_details.vendor_details.get_vendor_list"
+        # url = "http://localhost:8030/api/method/demo.demo.doctype.demo_country.demo_country.remove_country"
         response = requests.request("DELETE", url,headers = {
         'Content-Type': 'application/json',
-        },data=data)
+        },json=data)
         response_data=response.json()
         print("Response:",response_data)
         return response_data
@@ -62,9 +62,12 @@ class VendorCountry(Document):
             print("An error occurred during the request:", e)
 @frappe.whitelist(allow_guest=True)
 def rename_country():
-    data=frappe.form_dict
-    print("data.old",data.new,data.old)
-    frappe.rename_doc("Vendor Country",data.old,data.new)
+    data = frappe.form_dict
+    frappe.db.sql("""
+        UPDATE `tabVendor Country`
+        SET name = %s
+        WHERE name = %s
+        """, (data.new, data.old))
 
 @frappe.whitelist(allow_guest=True)
 def update_country():
@@ -94,7 +97,7 @@ def get_country_list():
     print("self")
     country_list = frappe.get_all("Vendor Country", fields=["id", "country", "country_code"])
     return country_list
-@frappe.whitelist()
+@frappe.whitelist(allow_guest=True)
 def get_country_remove():
     data=frappe.form_dict
     

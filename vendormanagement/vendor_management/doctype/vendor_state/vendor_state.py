@@ -22,7 +22,7 @@ class VendorState(Document):
         # url="http://localhost:8030/api/method/vendormanagement.vendor_management.doctype.vendor_details.vendor_details.get_vendor_list"
         response = requests.request("DELETE", url,headers = {
             'Content-Type': 'application/json',
-            },data=data)
+            },json=data)
         response_data=response.json()
         print("Response:",response_data)
         return response_data
@@ -99,7 +99,7 @@ def update_state():
 # 					new_doc.insert(ignore_permissions=True)
 
 # 	return response_data
-@frappe.whitelist()
+@frappe.whitelist(allow_guest=True)
 def get_state_remove():
     data=frappe.form_dict
     frappe.delete_doc('Vendor State',data.name)

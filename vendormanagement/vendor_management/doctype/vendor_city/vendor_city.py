@@ -16,12 +16,12 @@ class VendorCity(Document):
 		url="http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_city.vendor_city.get_city_remove"
 	# url="http://localhost:8030/api/method/vendormanagement.vendor_management.doctype.vendor_details.vendor_details.get_vendor_list"
 		data={
-			name:self.name
+			"name":self.name
 
 		}
 		response = requests.request("DELETE", url,headers = {
 				'Content-Type': 'application/json',
-					},data=data)
+					},json=data)
 		response_data=response.json()
 		print("Response:",response_data)
 		return response_data
@@ -127,7 +127,7 @@ def get_city_list():
 	city_list=frappe.db.sql("""select * from `tabVendor City` """,as_dict=1)
 	return city_list
 @frappe.whitelist()
-def get_city_remove(data):
+def get_city_remove(allow_guest=True):
 	data=frappe.form_dict
 	
 	frappe.delete_doc('Vendor City',data.name)
