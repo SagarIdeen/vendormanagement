@@ -17,7 +17,7 @@
  "list_columns": [],
  "login_required": 0,
  "max_attachment_size": 0,
- "modified": "2023-10-31 16:37:40.896925",
+ "modified": "2023-11-02 10:36:51.488119",
  "modified_by": "Administrator",
  "module": "Vendor Management",
  "name": "vendor-details",
@@ -75,7 +75,7 @@
    "max_length": 0,
    "max_value": 0,
    "read_only": 0,
-   "reqd": 1,
+   "reqd": 0,
    "show_in_filter": 0
   },
   {
@@ -86,7 +86,7 @@
    "label": "Country",
    "max_length": 0,
    "max_value": 0,
-   "options": "Vendor_Country",
+   "options": "Vendor Country",
    "read_only": 0,
    "reqd": 1,
    "show_in_filter": 0
@@ -327,18 +327,6 @@
   },
   {
    "allow_read_on_all_link_options": 0,
-   "fieldname": "attachements",
-   "fieldtype": "Attach",
-   "hidden": 0,
-   "label": "Attachments",
-   "max_length": 0,
-   "max_value": 0,
-   "read_only": 0,
-   "reqd": 0,
-   "show_in_filter": 0
-  },
-  {
-   "allow_read_on_all_link_options": 0,
    "fieldname": "",
    "fieldtype": "Column Break",
    "hidden": 0,
@@ -364,15 +352,13 @@
   },
   {
    "allow_read_on_all_link_options": 0,
-   "default": "New",
-   "fieldname": "status",
-   "fieldtype": "Select",
+   "fieldname": "attachements",
+   "fieldtype": "Attach",
    "hidden": 0,
-   "label": "Status",
+   "label": "Attachments",
    "max_length": 0,
    "max_value": 0,
-   "options": "New\nApproved\nRejected",
-   "read_only": 1,
+   "read_only": 0,
    "reqd": 0,
    "show_in_filter": 0
   }

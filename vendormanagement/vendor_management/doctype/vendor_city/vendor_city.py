@@ -128,8 +128,9 @@ def get_city_list():
 	return city_list
 @frappe.whitelist()
 def get_city_remove(data):
+	data=frappe.form_dict
 	
-	frappe.delete_doc('Vendor City',data)
+	frappe.delete_doc('Vendor City',data.name)
 
 
 	

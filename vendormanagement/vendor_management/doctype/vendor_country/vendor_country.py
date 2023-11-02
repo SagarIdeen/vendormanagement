@@ -11,6 +11,7 @@ class VendorCountry(Document):
         frappe.enqueue(self.set_country)
     def after_rename(self, old, new, merge=False):
         # rename_country()
+        # url = "http://localhost:8030/api/method/vendormanagement.vendor_management.doctype.vendor_country.vendor_country.rename_country"
         url = "http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_country.vendor_country.rename_country"
         data = {
             "old":old,
@@ -62,6 +63,7 @@ class VendorCountry(Document):
 @frappe.whitelist(allow_guest=True)
 def rename_country():
     data=frappe.form_dict
+    print("data.old",data.new,data.old)
     frappe.rename_doc("Vendor Country",data.old,data.new)
 
 @frappe.whitelist(allow_guest=True)
@@ -93,6 +95,8 @@ def get_country_list():
     country_list = frappe.get_all("Vendor Country", fields=["id", "country", "country_code"])
     return country_list
 @frappe.whitelist()
-def get_country_remove(data):
-	frappe.delete_doc('Vendor Country',data)
+def get_country_remove():
+    data=frappe.form_dict
+    
+    frappe.delete_doc('Vendor Country',data.name)
 	

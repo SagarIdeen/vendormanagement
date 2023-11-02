@@ -100,8 +100,9 @@ def update_state():
 
 # 	return response_data
 @frappe.whitelist()
-def get_state_remove(data):
-	frappe.delete_doc('Vendor State',data)
+def get_state_remove():
+    data=frappe.form_dict
+    frappe.delete_doc('Vendor State',data.name)
 	
 @frappe.whitelist(allow_guest=True)
 def get_state_list():
