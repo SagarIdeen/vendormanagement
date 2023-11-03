@@ -18,7 +18,7 @@ class VendorState(Document):
 			"name":self.name
 
 		}
-        url="http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_city.vendor_city.get_state_remove"
+        url="http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_state.vendor_state.get_state_remove"
         # url="http://localhost:8030/api/method/vendormanagement.vendor_management.doctype.vendor_details.vendor_details.get_vendor_list"
         response = requests.request("DELETE", url,headers = {
             'Content-Type': 'application/json',
