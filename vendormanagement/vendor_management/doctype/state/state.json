@@ -1,34 +1,36 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2023-10-16 16:43:37.994973",
+ "autoname": "field:state",
+ "creation": "2023-10-17 15:48:58.621621",
  "default_view": "List",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "attachments",
-  "file_name"
+  "state",
+  "gst_code"
  ],
  "fields": [
   {
-   "description": "Example",
-   "fieldname": "attachments",
-   "fieldtype": "Attach",
-   "label": "Attachments"
+   "fieldname": "state",
+   "fieldtype": "Data",
+   "label": "State",
+   "unique": 1
   },
   {
-   "fieldname": "file_name",
+   "fieldname": "gst_code",
    "fieldtype": "Data",
-   "label": "File Name"
+   "label": "GST Code"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-01-08 15:57:16.720811",
+ "modified": "2023-10-17 15:48:58.621621",
  "modified_by": "Administrator",
  "module": "Vendor Management",
- "name": "FileUpload",
+ "name": "State",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {

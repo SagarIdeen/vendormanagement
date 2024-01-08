@@ -4,7 +4,6 @@
 frappe.ui.form.on('Vendor Details', {
 	
 	refresh: function (frm) {
-		console.log(frm.doc.status);
 		if (frm.doc.status == "New") {
 			frm.events.approve_reject(frm)
 		} else {
@@ -15,6 +14,17 @@ frappe.ui.form.on('Vendor Details', {
 		frm.events.show_duplication(frm)
 
 	},
+	preview:function(frm){
+		window.open(frm.doc.attachements);
+		// frm.call({
+		// 	method:"get_image",
+		// 	args:{
+		// 		name:frm.docname
+		// 	}
+		// }
+
+	},
+
 	on_submit: function (frm) {
 		console.log('test after save');
 	},
@@ -68,6 +78,37 @@ frappe.ui.form.on('Vendor Details', {
 
 
 	},
+	country:function(frm){
+		
+		frm.trigger('get_state')
+		frm.trigger('get_city')
+	},
+	state:function(frm){
+		frm.trigger('get_city')
+	},
+	get_state(frm){
+		frm.set_query('state', function () {
+			return {
+				query: "vendormanagement.vendor_management.doctype.vendor_city.vendor_city.get_state",
+				filters: { 'country_name': frm.doc.country }
+			};
+		});
+
+	},
+	get_city(frm){
+		if ((frm.doc.country)&&(frm.doc.state)){
+			frm.set_query('city', function () {
+				return {
+					query: "vendormanagement.vendor_management.doctype.vendor_city.vendor_city.get_city",
+					filters: { 'country': frm.doc.country,'state':frm.doc.state }
+				};
+			});
+
+		}
+		
+
+	}
+
 	
 	 
 });

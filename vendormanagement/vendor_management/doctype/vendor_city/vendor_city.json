@@ -1,0 +1,123 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "autoname": "format:{city}-{city_code}-{state_code}-{country_code}",
+ "creation": "2023-10-20 12:22:44.377834",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "country_section",
+  "country",
+  "column_break_w3ghi",
+  "country_code",
+  "state_section",
+  "state",
+  "column_break_a66ed",
+  "state_code",
+  "city_section",
+  "city",
+  "column_break_xwkve",
+  "city_code",
+  "status"
+ ],
+ "fields": [
+  {
+   "fieldname": "city",
+   "fieldtype": "Data",
+   "label": "City"
+  },
+  {
+   "fieldname": "state",
+   "fieldtype": "Link",
+   "label": "State",
+   "options": "Vendor State"
+  },
+  {
+   "fetch_from": "state.state_code",
+   "fieldname": "state_code",
+   "fieldtype": "Data",
+   "label": "State Code",
+   "read_only": 1
+  },
+  {
+   "fieldname": "country",
+   "fieldtype": "Link",
+   "label": "Country",
+   "options": "Vendor Country"
+  },
+  {
+   "fetch_from": "country.country_code",
+   "fieldname": "country_code",
+   "fieldtype": "Data",
+   "label": "Country Code",
+   "read_only": 1
+  },
+  {
+   "fieldname": "city_section",
+   "fieldtype": "Section Break",
+   "label": "City"
+  },
+  {
+   "fieldname": "state_section",
+   "fieldtype": "Section Break",
+   "label": "State"
+  },
+  {
+   "fieldname": "column_break_a66ed",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "country_section",
+   "fieldtype": "Section Break",
+   "label": "Country"
+  },
+  {
+   "fieldname": "column_break_w3ghi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_xwkve",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "city_code",
+   "fieldtype": "Data",
+   "label": "City Code"
+  },
+  {
+   "default": "unsync",
+   "fieldname": "status",
+   "fieldtype": "Data",
+   "label": "status"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-11-02 16:55:28.633654",
+ "modified_by": "Administrator",
+ "module": "Vendor Management",
+ "name": "Vendor City",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "show_title_field_in_link": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "city"
+}
