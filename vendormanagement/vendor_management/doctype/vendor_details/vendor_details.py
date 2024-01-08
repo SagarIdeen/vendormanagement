@@ -11,8 +11,14 @@ import os
 from frappe.utils.file_manager import save_url
 from frappe.utils.background_jobs import enqueue
 
+
 class VendorDetails(Document):
 	pass
+@frappe.whitelist(allow_guest=True)
+def get_image(name):
+	attachment=frappe.get_doc("Vendor Details",name)
+	return attachment.attachements
+
 				
 @frappe.whitelist()
 def duplicate(name,pan_number,din,mobile):
@@ -42,15 +48,6 @@ def duplicate(name,pan_number,din,mobile):
 	return vendor_data
 
 
-# @frappe.whitelist()
-# def get_vendor_data():
-# 	url="http://localhost:8030/api/method/vendormanagement.vendor_management.doctype.vendor_details.vendor_details.get_vendor_list"
-# 	response = requests.request("GET", url,headers = {
-# 			'Content-Type': 'application/json',
-# 				})
-# 	response_data=response.json()
-	
-# 	print("Response:",response_data)
 @frappe.whitelist(allow_guest=True)
 def get_vendor_list():
 	
@@ -60,15 +57,20 @@ def get_vendor_list():
 
 @frappe.whitelist(allow_guest=True)
 def get_vendor_data():
-	url="http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_details.vendor_details.get_vendor_list"
+	
+	data=get_api_settings()
+	
+	
+	url=data['base_url']+"/api/method/vendormanagement.vendor_management.doctype.vendor_details.vendor_details.get_vendor_list"
 	# url="http://localhost:8030/api/method/vendormanagement.vendor_management.doctype.vendor_details.vendor_details.get_vendor_list"
 	response = requests.request("GET", url,headers = {
 			'Content-Type': 'application/json',
 				})
 	response_data=response.json()
 	print("Response:",response_data)
-	enqueue_receive_and_create_vendor_data(response_data)
-	return response_data
+	# enqueue_receive_and_create_vendor_data(response_data)
+	receive_and_create_vendor_data(response_data)
+	# return response_data
 
 @frappe.whitelist(allow_guest=True)	
 def enqueue_receive_and_create_vendor_data(response_data):
@@ -81,6 +83,10 @@ def enqueue_receive_and_create_vendor_data(response_data):
 
 @frappe.whitelist(allow_guest=True)
 def receive_and_create_vendor_data(data):
+		api_data=get_api_settings()
+		api_key=api_data['api_key']
+		api_secret=api_data['api_secret']
+		print("apis",api_key,api_secret)
 	# Deserialize the received data
 		received_data = data
 		print("received_data",received_data)
@@ -125,14 +131,22 @@ def receive_and_create_vendor_data(data):
 					# url = "http://localhost:8030/api/method/upload_file"
 					
 					if d['attachements']:
-						regex= 'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\), ]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'
-						checkURL= re.findall(regex,d['attachements'])
-						if checkURL:
-							remote_file_url=d['attachements']
-						else:
+						# regex= 'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\), ]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'
+						# checkURL= re.findall(regex,d['attachements'])
+						# print("checkURL",checkURL)
+						# if checkURL:
+						# 	remote_file_url=d['attachements']
+						# else:
+
+						headers = {
+						'Authorization': 'token '+api_key+':'+api_secret					}
+
+
 					
-							remote_file_url='http://35.154.0.123:82'+d['attachements']
-						remote_file_response = requests.get(remote_file_url)
+						remote_file_url=api_data['base_url']+d['attachements']
+						# remote_file_response = requests.get(remote_file_url)
+						remote_file_response = requests.request("GET", remote_file_url, headers=headers)
+
 						print("remote_file_response",remote_file_response)
 						
 						frappe.get_doc(
@@ -150,53 +164,12 @@ def receive_and_create_vendor_data(data):
 						}
 						).save(ignore_permissions=True)
 
-					# payload = {'is_private': '1',
-					# 'folder': 'Home',
-					# 'doctype': 'Vendor Details',
-					# 'docname': new_doc.name,
-					# 'fieldname': 'file'}
-
-					
-					# files = {
-        			# 	'file': (remote_file_url.split('/')[-1], remote_file_response.content, 'image/jpeg')
-    				# 		}
-					# headers = {
-					# 'Cookie': 'sid=Administrator'
-					# }
-
-					# response = requests.request("POST", url, headers=headers, data=payload, files=files)
-					# print('response',response)
-
-
-
-
-
-					# # Attach files to the document using the path provided
-					# if d['attachements']:
-					# 	url = "http://localhost:8030"
-
-					# 	payload = {"data": '{"pan_number":"F","mobile_number":"FD","din":"F","status":"New","doctype":"Vendor Details","web_form_name":"Vendor Details","attachements":"/private/files/Screenshot (88).png"}',
-					# 	"web_form": 'Vendor Details',
-					# 	"for_payment": 'false',
-					# 	"cmd": 'frappe.website.doctype.web_form.web_form.accept'}
-					# 	files=[
-
-					# 	]
-					# 	headers = {
-					# 	'Cookie': 'sid=Guest'
-					# 	}
-
-					# 	response = requests.request("POST", url, headers=headers, data=payload, files=files)
-					# 	# attachment_path =d['attachements']
-					# # 	attachment_path='/private/files/Screenshot (84).png'
-					# # 	# for attachment_path in d['attachements']:
-					# # 	print("attachment_path",attachment_path)
-					# # 	filename = os.path.basename(attachment_path)
-					# # 	print("filename",filename)
-					
-					# # # Save the URL to attach the file
-					# # 	save_url(attachment_path,filename,"Vendor Details",new_doc.name, "Home", is_private=1)
-
 		return "Data received and processed successfully."
+frappe.whitelist()
+def get_api_settings():
+	base_url=frappe.get_doc("Vendor API Settings").base_url
+	api_key=frappe.get_doc("Vendor API Settings").api_key
+	api_secret=frappe.get_doc("Vendor API Settings").api_secret
+	return {'base_url':base_url,'api_key':api_key,'api_secret':api_secret}
 
 

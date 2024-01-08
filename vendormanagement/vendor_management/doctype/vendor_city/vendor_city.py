@@ -7,14 +7,17 @@ import requests
 import json
 import re
 
+
 class VendorCity(Document):
 	def on_update(self):
 		frappe.enqueue(self.set_cities)
 	def on_trash(self):
 		self.remove_city()
 	def remove_city(self):
-		url="http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_city.vendor_city.get_city_remove"
-	# url="http://localhost:8030/api/method/vendormanagement.vendor_management.doctype.vendor_details.vendor_details.get_vendor_list"
+		base_url=get_api_settings()
+		print("base_url",base_url)
+		url=base_url['base_url']+"/api/method/vendormanagement.vendor_management.doctype.vendor_city.vendor_city.get_city_remove"
+		# url="http://192.168.29.100:8002/api/method/vendormanagement.vendor_management.doctype.vendor_details.vendor_details.get_vendor_list"
 		data={
 			"name":self.name
 
@@ -27,8 +30,9 @@ class VendorCity(Document):
 		return response_data
 		# self.set_cities()
 	def set_cities(self):
+		base_url=get_api_settings()
 		if self.status=="unsync":
-			url = "http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_city.vendor_city.update_city"
+			url = base_url['base_url']+"/api/method/vendormanagement.vendor_management.doctype.vendor_city.vendor_city.update_city"
 			data = {
 			"name":self.name,
 			"city_code":self.city_code,
@@ -133,8 +137,14 @@ def get_city_remove():
 	data=frappe.form_dict
 	
 	frappe.delete_doc('Vendor City',data.name)
+	return data
 
-
+frappe.whitelist()
+def get_api_settings():
+	base_url=frappe.get_doc("Vendor API Settings").base_url
+	api_key=frappe.get_doc("Vendor API Settings").api_key
+	api_secret=frappe.get_doc("Vendor API Settings").api_secret
+	return {'base_url':base_url,'api_key':api_key,'api_secret':api_secret}
 	
 
 

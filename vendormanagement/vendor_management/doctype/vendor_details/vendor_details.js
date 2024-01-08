@@ -16,6 +16,12 @@ frappe.ui.form.on('Vendor Details', {
 	},
 	preview:function(frm){
 		window.open(frm.doc.attachements);
+		// frm.call({
+		// 	method:"get_image",
+		// 	args:{
+		// 		name:frm.docname
+		// 	}
+		// }
 
 	},
 

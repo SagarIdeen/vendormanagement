@@ -10,9 +10,10 @@ class VendorCountry(Document):
         # self.set_country()
         frappe.enqueue(self.set_country)
     def after_rename(self, old, new, merge=False):
+        base_url=get_api_settings()
         # rename_country()
-        
-        url = "http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_country.vendor_country.rename_country"
+        # url = "http://192.168.29.100:8002/api/method/vendormanagement.vendor_management.doctype.vendor_country.vendor_country.rename_country"
+        url = base_url['base_url']+"/api/method/vendormanagement.vendor_management.doctype.vendor_country.vendor_country.rename_country"
         data = {
             "old":old,
             "new": new,
@@ -31,11 +32,13 @@ class VendorCountry(Document):
     def on_trash(self):
         self.remove_country()
     def remove_country(self):
+        base_url=get_api_settings()
         data={
         "name":self.name
 
         }
-        url="http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_country.vendor_country.get_country_remove"
+        url=base_url['base_url']+"/api/method/vendormanagement.vendor_management.doctype.vendor_country.vendor_country.get_country_remove"
+        # url="http://192.168.29.100:8002/api/method/vendormanagement.vendor_management.doctype.vendor_country.vendor_country.get_country_remove"
         # url = "http://localhost:8030/api/method/demo.demo.doctype.demo_country.demo_country.remove_country"
         response = requests.request("DELETE", url,headers = {
         'Content-Type': 'application/json',
@@ -45,9 +48,10 @@ class VendorCountry(Document):
         return response_data
 
     def set_country(self):
+        base_url=get_api_settings()
         
         if self.status=="unsync":
-            url = "http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_country.vendor_country.update_country"
+            url = base_url['base_url']+"/api/method/vendormanagement.vendor_management.doctype.vendor_country.vendor_country.update_country"
             # url = "http://localhost:8030/api/method/demo.demo.doctype.demo_country.demo_country.update_country"
             data = {
                 "name":self.name,
@@ -98,6 +102,7 @@ def update_country():
 
 @frappe.whitelist()
 def get_country_list():
+    
     print("self")
     country_list = frappe.get_all("Vendor Country", fields=["id", "country", "country_code"])
     return country_list
@@ -106,4 +111,10 @@ def get_country_remove():
     data=frappe.form_dict
     
     frappe.delete_doc('Vendor Country',data.name)
+frappe.whitelist()
+def get_api_settings():
+	base_url=frappe.get_doc("Vendor API Settings").base_url
+	api_key=frappe.get_doc("Vendor API Settings").api_key
+	api_secret=frappe.get_doc("Vendor API Settings").api_secret
+	return {'base_url':base_url,'api_key':api_key,'api_secret':api_secret}
 	

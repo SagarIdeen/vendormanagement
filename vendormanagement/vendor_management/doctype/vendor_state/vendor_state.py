@@ -14,11 +14,13 @@ class VendorState(Document):
     def on_trash(self):
         self.remove_state()
     def remove_state(self):
+        base_url=get_api_settings()
+        
         data={
 			"name":self.name
 
 		}
-        url="http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_state.vendor_state.get_state_remove"
+        url=base_url['base_url']+"/api/method/vendormanagement.vendor_management.doctype.vendor_state.vendor_state.get_state_remove"
         # url="http://localhost:8030/api/method/vendormanagement.vendor_management.doctype.vendor_details.vendor_details.get_vendor_list"
         response = requests.request("DELETE", url,headers = {
             'Content-Type': 'application/json',
@@ -28,9 +30,10 @@ class VendorState(Document):
         return response_data
 
     def set_state(self):
+        base_url=get_api_settings()
         if self.status=="unsync":
 
-            url = "http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_state.vendor_state.update_state"
+            url = base_url['base_url']+"/api/method/vendormanagement.vendor_management.doctype.vendor_state.vendor_state.update_state"
             data = {
             "name":self.name,
             "state":self.state,
@@ -75,33 +78,7 @@ def update_state():
         return "state data updated or created successfully"
     except Exception as e:
         return "An error occurred while processing the request: " + str(e)
-# def set_state():
-# 	url="http://http://35.154.0.123:82/api/method/vendormanagement.vendor_management.doctype.vendor_state.vendor_state.update_state_list"
-# 	response = requests.request("GET", url,headers = {
-# 			'Content-Type': 'application/json',
-# 				})
-# 	response_data=response.json()
-# 	for d in response_data["message"]:
-# 			state_id  = d["state_id"]
-# 			if id:
-# 				existing_doc = frappe.db.exists("Vendor State",{"state_id":state_id })
-				
-# 				if existing_doc:
-# 					country = frappe.get_doc("Vendor State", existing_doc)
-# 					# if country.country != d['name']:
-# 					# 	print("country.country",d['name'],country.country)
-						
 
-
-# 				else:
-# 					new_doc=frappe.new_doc("Vendor State")
-# 					new_doc.state_id =d['state_id']
-# 					new_doc.state =d['state']
-# 					new_doc.state_code=d['state_code']
-# 					new_doc.country_name=d['country_name']
-# 					new_doc.insert(ignore_permissions=True)
-
-# 	return response_data
 @frappe.whitelist(allow_guest=True)
 def get_state_remove():
     data=frappe.form_dict
@@ -121,3 +98,9 @@ def get_city_filter(country,state):
 	city_list =frappe.db.sql("""select * from `tabVendor City` where country=%(country)s and state=%(state)s """,
 	values={'country':country,'state':state},as_dict=1)
 	return city_list
+frappe.whitelist()
+def get_api_settings():
+	base_url=frappe.get_doc("Vendor API Settings").base_url
+	api_key=frappe.get_doc("Vendor API Settings").api_key
+	api_secret=frappe.get_doc("Vendor API Settings").api_secret
+	return {'base_url':base_url,'api_key':api_key,'api_secret':api_secret}
