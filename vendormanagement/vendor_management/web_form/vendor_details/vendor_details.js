@@ -1,6 +1,8 @@
 frappe.ready(function () {
-  frappe.web_form.on_submit = () => {
-    const data = frappe.web_form.get_values();
+  console.log("webform");
+  frappe.web_form.validate = () => {
+    let data = frappe.web_form.get_values();
+  
     const pan_number = data.pan_number;
     const gst_number = data.gst_provisional_id;
     const stateName = data.state;
@@ -48,7 +50,11 @@ frappe.ready(function () {
     }
 
     return true; // Allow form submission for non-India countries
-  };
+    }
+
+  
+    
+    
   // filters
   frappe.web_form.on("country", (field, value) => {
     update_state_filters();
