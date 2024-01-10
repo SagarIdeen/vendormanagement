@@ -10,8 +10,11 @@ frappe.ui.form.on('Vendor Details', {
 			frm.page.clear_actions_menu();
 			frm.disable_save()
 		}
+if(!frm.is_new()){
+	frm.events.show_duplication(frm)
 
-		frm.events.show_duplication(frm)
+}
+		
 
 	},
 	preview:function(frm){
