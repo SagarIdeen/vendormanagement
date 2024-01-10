@@ -18,7 +18,7 @@
  "list_columns": [],
  "login_required": 0,
  "max_attachment_size": 0,
- "modified": "2024-01-10 14:45:17.016986",
+ "modified": "2024-01-10 15:09:16.177897",
  "modified_by": "Administrator",
  "module": "Vendor Management",
  "name": "vendor-details",
@@ -89,7 +89,7 @@
    "max_value": 0,
    "options": "Vendor Country",
    "read_only": 0,
-   "reqd": 1,
+   "reqd": 0,
    "show_in_filter": 0
   },
   {
@@ -188,7 +188,7 @@
    "max_length": 0,
    "max_value": 0,
    "read_only": 0,
-   "reqd": 1,
+   "reqd": 0,
    "show_in_filter": 0
   },
   {
