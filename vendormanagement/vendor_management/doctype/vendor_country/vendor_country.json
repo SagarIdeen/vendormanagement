@@ -35,13 +35,14 @@
    "default": "unsync",
    "fieldname": "status",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "status",
    "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-11-02 16:33:27.973529",
+ "modified": "2024-01-10 13:24:59.562670",
  "modified_by": "Administrator",
  "module": "Vendor Management",
  "name": "Vendor Country",

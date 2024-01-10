@@ -37,7 +37,7 @@ class VendorCountry(Document):
         "name":self.name
 
         }
-        url=base_url['base_url']+"/api/method/vendormanagement.vendor_management.doctype.vendor_country.vendor_country.get_country_remove"
+        url= base_url['base_url']+"/api/method/vendormanagement.vendor_management.doctype.vendor_country.vendor_country.get_country_remove"
         # url="http://192.168.29.100:8002/api/method/vendormanagement.vendor_management.doctype.vendor_country.vendor_country.get_country_remove"
         # url = "http://localhost:8030/api/method/demo.demo.doctype.demo_country.demo_country.remove_country"
         response = requests.request("DELETE", url,headers = {
