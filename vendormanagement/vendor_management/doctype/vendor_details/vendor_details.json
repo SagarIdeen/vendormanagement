@@ -119,13 +119,13 @@
    "label": "IFSC code"
   },
   {
-   "description": "Example:ASDFG0012A",
+   "description": "Example:ASDE0012A",
    "fieldname": "pan_number",
    "fieldtype": "Data",
    "label": "PAN Number"
   },
   {
-   "description": "Example:AAAPZ1234C",
+   "description": "Example:29GGGGG1314R9Z6",
    "fieldname": "gst_provisional_id",
    "fieldtype": "Data",
    "label": "GST Provisional ID"
@@ -230,7 +230,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-01-10 14:43:56.006296",
+ "modified": "2024-01-10 15:14:25.494211",
  "modified_by": "Administrator",
  "module": "Vendor Management",
  "name": "Vendor Details",
