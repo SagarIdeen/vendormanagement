@@ -15,19 +15,20 @@ class VendorCity(Document):
 		self.remove_city()
 	def remove_city(self):
 		base_url=get_api_settings()
-		print("base_url",base_url)
-		url=base_url['base_url']+"/api/method/vendormanagement.vendor_management.doctype.vendor_city.vendor_city.get_city_remove"
-		# url="http://192.168.29.100:8002/api/method/vendormanagement.vendor_management.doctype.vendor_details.vendor_details.get_vendor_list"
-		data={
-			"name":self.name
+		if base_url['base_url']:
+			print("base_url",base_url)
+			url=base_url['base_url']+"/api/method/vendormanagement.vendor_management.doctype.vendor_city.vendor_city.get_city_remove"
+			# url="http://192.168.29.100:8002/api/method/vendormanagement.vendor_management.doctype.vendor_details.vendor_details.get_vendor_list"
+			data={
+				"name":self.name
 
-		}
-		response = requests.request("DELETE", url,headers = {
-				'Content-Type': 'application/json',
-					},json=data)
-		response_data=response.json()
-		print("Response:",response_data)
-		return response_data
+			}
+			response = requests.request("DELETE", url,headers = {
+					'Content-Type': 'application/json',
+						},json=data)
+			response_data=response.json()
+			print("Response:",response_data)
+			return response_data
 		# self.set_cities()
 	def set_cities(self):
 		base_url=get_api_settings()

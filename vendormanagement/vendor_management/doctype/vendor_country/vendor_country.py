@@ -33,19 +33,20 @@ class VendorCountry(Document):
         self.remove_country()
     def remove_country(self):
         base_url=get_api_settings()
-        data={
-        "name":self.name
+        if base_url['base_url']:
+            data={
+            "name":self.name
 
-        }
-        url= base_url['base_url']+"/api/method/vendormanagement.vendor_management.doctype.vendor_country.vendor_country.get_country_remove"
-        # url="http://192.168.29.100:8002/api/method/vendormanagement.vendor_management.doctype.vendor_country.vendor_country.get_country_remove"
-        # url = "http://localhost:8030/api/method/demo.demo.doctype.demo_country.demo_country.remove_country"
-        response = requests.request("DELETE", url,headers = {
-        'Content-Type': 'application/json',
-        },json=data)
-        response_data=response.json()
-        print("Response:",response_data)
-        return response_data
+            }
+            url= base_url['base_url']+"/api/method/vendormanagement.vendor_management.doctype.vendor_country.vendor_country.get_country_remove"
+            # url="http://192.168.29.100:8002/api/method/vendormanagement.vendor_management.doctype.vendor_country.vendor_country.get_country_remove"
+            # url = "http://localhost:8030/api/method/demo.demo.doctype.demo_country.demo_country.remove_country"
+            response = requests.request("DELETE", url,headers = {
+            'Content-Type': 'application/json',
+            },json=data)
+            response_data=response.json()
+            print("Response:",response_data)
+            return response_data
 
     def set_country(self):
         base_url=get_api_settings()

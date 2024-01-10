@@ -15,19 +15,20 @@ class VendorState(Document):
         self.remove_state()
     def remove_state(self):
         base_url=get_api_settings()
+        if base_url['base_url']:
         
-        data={
-			"name":self.name
+            data={
+                "name":self.name
 
-		}
-        url=base_url['base_url']+"/api/method/vendormanagement.vendor_management.doctype.vendor_state.vendor_state.get_state_remove"
-        # url="http://localhost:8030/api/method/vendormanagement.vendor_management.doctype.vendor_details.vendor_details.get_vendor_list"
-        response = requests.request("DELETE", url,headers = {
-            'Content-Type': 'application/json',
-            },json=data)
-        response_data=response.json()
-        print("Response:",response_data)
-        return response_data
+            }
+            url=base_url['base_url']+"/api/method/vendormanagement.vendor_management.doctype.vendor_state.vendor_state.get_state_remove"
+            # url="http://localhost:8030/api/method/vendormanagement.vendor_management.doctype.vendor_details.vendor_details.get_vendor_list"
+            response = requests.request("DELETE", url,headers = {
+                'Content-Type': 'application/json',
+                },json=data)
+            response_data=response.json()
+            print("Response:",response_data)
+            return response_data
 
     def set_state(self):
         base_url=get_api_settings()
