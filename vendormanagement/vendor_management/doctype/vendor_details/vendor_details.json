@@ -119,7 +119,7 @@
    "label": "IFSC code"
   },
   {
-   "documentation_url": "Example:ASDFG0012A",
+   "description": "Example:ASDFG0012A",
    "fieldname": "pan_number",
    "fieldtype": "Data",
    "label": "PAN Number"
