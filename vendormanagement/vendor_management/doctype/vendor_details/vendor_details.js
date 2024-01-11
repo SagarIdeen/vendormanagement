@@ -82,11 +82,17 @@ if(!frm.is_new()){
 
 	},
 	country:function(frm){
+		frm.doc.state=undefined
+		frm.doc.city=undefined
+		frm.refresh_field("state")
+		frm.refresh_field("city")
 		
 		frm.trigger('get_state')
 		frm.trigger('get_city')
 	},
 	state:function(frm){
+		frm.doc.city=undefined
+		frm.refresh_field("city")
 		frm.trigger('get_city')
 	},
 	get_state(frm){
