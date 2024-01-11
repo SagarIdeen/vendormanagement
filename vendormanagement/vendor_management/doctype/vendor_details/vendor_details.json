@@ -70,6 +70,7 @@
    "label": "Address 2"
   },
   {
+   "depends_on": "state",
    "fieldname": "city",
    "fieldtype": "Link",
    "label": "City",
@@ -81,6 +82,7 @@
    "label": "Pin code"
   },
   {
+   "depends_on": "country",
    "fieldname": "state",
    "fieldtype": "Link",
    "label": "State",
@@ -230,7 +232,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-01-10 15:14:25.494211",
+ "modified": "2024-01-11 11:03:41.617176",
  "modified_by": "Administrator",
  "module": "Vendor Management",
  "name": "Vendor Details",

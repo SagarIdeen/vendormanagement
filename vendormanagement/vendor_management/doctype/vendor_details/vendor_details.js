@@ -105,11 +105,14 @@ if(!frm.is_new()){
 
 	},
 	get_city(frm){
-		if ((frm.doc.country)&&(frm.doc.state)){
+		console.log("Change");
+		if ((frm.doc.country)&&(frm.doc.state))
+		{
+			console.log("get_city",frm.doc.country,frm.doc.state);
 			frm.set_query('city', function () {
 				return {
 					query: "vendormanagement.vendor_management.doctype.vendor_city.vendor_city.get_city",
-					filters: { 'country': frm.doc.country,'state':frm.doc.state }
+					filters: { 'country': frm.doc.country?frm.doc.country:undefined,'state':frm.doc.state?frm.doc.state:undefined }
 				};
 			});
 
