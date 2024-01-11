@@ -57,11 +57,17 @@ frappe.ready(function () {
     
   // filters
   frappe.web_form.on("country", (field, value) => {
+    frappe.web_form.set_value("state", undefined)
+    frappe.web_form.set_value("city",undefined)
+   
+
     update_state_filters();
     update_city_filters();
   });
 
   frappe.web_form.on("state", (field, value) => {
+   
+    frappe.web_form.set_value("city",undefined)
     update_city_filters();
   });
 

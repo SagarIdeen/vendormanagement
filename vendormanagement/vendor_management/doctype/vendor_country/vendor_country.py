@@ -6,8 +6,6 @@ from frappe.utils.background_jobs import enqueue
 
 class VendorCountry(Document):
     def on_update(self):
-        print("onupdate")
-        # self.set_country()
         frappe.enqueue(self.set_country)
     def after_rename(self, old, new, merge=False):
         base_url=get_api_settings()
@@ -104,7 +102,7 @@ def update_country():
 @frappe.whitelist()
 def get_country_list():
     
-    print("self")
+    
     country_list = frappe.get_all("Vendor Country", fields=["id", "country", "country_code"])
     return country_list
 @frappe.whitelist(allow_guest=True)
